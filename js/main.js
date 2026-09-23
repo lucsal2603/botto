@@ -72,7 +72,10 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
   let shown = false;
   let hoverScale = 1;
 
-  window.addEventListener('mousemove', (e) => {
+  /* pointer event, non mouse: durante un drag GSAP Draggable fa preventDefault sul pointerdown
+     e il browser sopprime i mousemove, il guanto resterebbe fermo */
+  window.addEventListener('pointermove', (e) => {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
     xTo(e.clientX - TIP_X);
     yTo(e.clientY - TIP_Y);
     if (!reduce) {
@@ -87,7 +90,7 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
     }
   }, { passive: true });
 
-  document.addEventListener('mouseleave', () => {
+  document.addEventListener('pointerleave', () => {
     shown = false;
     gsap.to(g, { autoAlpha: 0, duration: 0.2, overwrite: 'auto' });
   });
@@ -103,12 +106,12 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
     gsap.to(g, { scaleX: 1, scaleY: 1, duration: 0.25, ease: 'power2.out', overwrite: 'auto' });
   });
 
-  window.addEventListener('mousedown', () => {
-    if (reduce) return;
+  window.addEventListener('pointerdown', (e) => {
+    if (reduce || (e.pointerType && e.pointerType !== 'mouse')) return;
     gsap.to(g, { scaleX: hoverScale * 1.08, scaleY: hoverScale * 0.8, duration: 0.1, overwrite: 'auto' });
   });
-  window.addEventListener('mouseup', () => {
-    if (reduce) return;
+  window.addEventListener('pointerup', (e) => {
+    if (reduce || (e.pointerType && e.pointerType !== 'mouse')) return;
     gsap.to(g, { scaleX: hoverScale, scaleY: hoverScale, duration: 0.3, ease: 'back.out(2.5)', overwrite: 'auto' });
   });
 })();
