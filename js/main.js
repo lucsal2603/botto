@@ -296,6 +296,23 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
       py(gsap.utils.clamp(-10, 6, dy * 26));
     });
   }
+  /* senza mouse (telefoni): le pupille guardano in giro da sole, ogni tanto tornano al centro */
+  if (eyes && !isFinePointer) {
+    let heroInVista = true;
+    ScrollTrigger.create({ trigger: '.hero', start: 'top bottom', end: 'bottom top', onToggle: (self) => { heroInVista = self.isActive; } });
+    const sguardo = () => {
+      if (heroInVista) {
+        const centro = Math.random() < 0.25;
+        gsap.to('.hero-eyes .pupil', {
+          x: centro ? 0 : gsap.utils.random(-14, 14),
+          y: centro ? 0 : gsap.utils.random(-10, 6),
+          duration: 0.22, ease: 'power2.out', overwrite: 'auto',
+        });
+      }
+      gsap.delayedCall(gsap.utils.random(1.2, 3), sguardo);
+    };
+    gsap.delayedCall(2.5, sguardo);
+  }
   function blink() {
     gsap.to('.hero-eyes .eye', {
       scaleY: 0.06,
