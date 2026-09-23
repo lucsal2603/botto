@@ -71,6 +71,18 @@ ul { list-style: none; }
 .preloader-star { width: min(70vmin, 640px); aspect-ratio: 1; }
 .preloader-star svg { width: 100%; height: 100%; overflow: visible; }
 
+/* freccia disegnata (niente caratteri/emoji): eredita colore e dimensione dal testo */
+.ico-arrow {
+  width: 1em; height: 1em;
+  display: inline-block;
+  vertical-align: -0.12em;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* ---------- CURSORE GUANTO ---------- */
 .guanto {
   position: fixed;
@@ -759,7 +771,7 @@ html.has-glove, html.has-glove * { cursor: none !important; }
 .contact-note { margin-top: 12px; font-size: 12.5px; letter-spacing: -0.01em; opacity: 0.6; }
 
 .stickerpile { position: absolute; inset: auto 0 0 0; height: clamp(300px, 36vw, 500px); }
-.stk { position: absolute; cursor: grab; user-select: none; -webkit-user-select: none; }
+.stk { position: absolute; cursor: grab; user-select: none; -webkit-user-select: none; touch-action: none; -webkit-touch-callout: none; }
 .stk:active { cursor: grabbing; }
 
 .stk-circle { width: clamp(120px, 13vw, 190px); left: 6%; top: 18%; }
@@ -861,11 +873,18 @@ html.has-glove, html.has-glove * { cursor: none !important; }
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 900px) {
   .nav-link { display: none; }
-  .hero { justify-content: center; }
-  .hero-title-wrap { margin-top: 8vh; }
-  .hero-sticker { top: -16%; }
-  .hero-foot { margin-top: auto; }
-  .hero-line-a { font-size: clamp(96px, 31vw, 430px); }
+  /* telefoni: titolo a poster, ogni riga a tutta larghezza, occhi subito sotto, tutto centrato */
+  .hero { justify-content: center; padding-top: 84px; }
+  .hero-title-wrap { margin-top: 0; }
+  .hero-title { letter-spacing: -0.045em; }
+  .hero-line { padding: 0.04em 0.02em 0.02em; }
+  .hero-line-a { font-size: 34.5vw; }
+  .hero-line-b { font-size: 32vw; }
+  .hero-line-b .hero-word { display: block; overflow: hidden; }
+  .hero-line-b .hero-word + .hero-word { font-size: 0.64em; margin-top: 0.04em; }
+  .hero-sticker { top: -7%; right: 0; }
+  .hero-foot { margin-top: 10px; padding-bottom: 8px; }
+  .hero-eyes { width: 54vw; }
   .stats { gap: 12px; }
   .stat { flex: 1 1 calc(50% - 6px); min-width: 0; }
   .venue-row, .venue-row--inv { grid-template-columns: 1fr; gap: 16px; }

@@ -592,12 +592,14 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     stagger: 0.09,
     scrollTrigger: { trigger: '#stickerpile', start: 'top 85%' },
   });
-  if (isFinePointer) {
+  /* trascinabili anche col dito (richiesta di Lucas): Draggable gestisce mouse e touch */
+  {
     Draggable.create(stickers, {
       type: 'x,y',
       bounds: '.contact-card',
       inertia: true,
       edgeResistance: 0.75,
+      allowContextMenu: true,
       onPress() {
         gsap.to(this.target, { scale: 1.08, duration: 0.18, ease: 'power2.out' });
         this.target.style.zIndex = 20;
