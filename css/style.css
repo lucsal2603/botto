@@ -189,22 +189,9 @@ ul { list-style: none; }
   justify-content: space-between;
   padding: 12px 2vw 20px;
 }
-.hero-eyes { width: clamp(120px, 14vw, 200px); }
+.hero-eyes { width: clamp(150px, 17vw, 250px); }
 .hero-eyes svg { width: 100%; overflow: visible; }
-.eye-ball { fill: #fff; stroke: var(--nero); stroke-width: 3; }
-.eye-lid { fill: var(--blu); stroke: var(--nero); stroke-width: 3; }
 .pupil { fill: var(--nero); }
-.ring { fill: none; stroke-width: 6; }
-.ring-rosa { stroke: var(--rosa); }
-.ring-verde { stroke: var(--verde); }
-.ring-blu { stroke: var(--azzurro); }
-.ring-lime { stroke: var(--lime); }
-.ring-crema { stroke: var(--crema); }
-.arr { fill: none; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
-.arr-verde { stroke: var(--verde); }
-.arr-crema { stroke: var(--crema); }
-.arr-rosa { stroke: var(--rosa); }
-.arr-lime { stroke: var(--lime); }
 
 .hero-badge { width: clamp(92px, 9vw, 130px); display: block; }
 .hero-badge svg { width: 100%; overflow: visible; }

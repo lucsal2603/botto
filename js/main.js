@@ -175,7 +175,7 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
       const dx = (e.clientX - (r.left + r.width / 2)) / window.innerWidth;
       const dy = (e.clientY - (r.top + r.height / 2)) / window.innerHeight;
       px(gsap.utils.clamp(-14, 14, dx * 34));
-      py(gsap.utils.clamp(-12, 8, dy * 26));
+      py(gsap.utils.clamp(-10, 6, dy * 26));
     });
   }
   function blink() {
