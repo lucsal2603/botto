@@ -277,8 +277,8 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     });
   }
 
-  /* rotellina del badge */
-  gsap.to('.hero-badge svg', { rotation: 360, duration: 16, ease: 'none', repeat: -1 });
+  /* freccia che saltella verso il basso */
+  gsap.to('.hero-badge svg', { y: 16, duration: 0.6, ease: 'power1.inOut', yoyo: true, repeat: -1 });
 
   /* stella del logo: giro lento */
   gsap.to('.logo-star-spin', { rotation: 360, transformOrigin: '50% 50%', duration: 24, ease: 'none', repeat: -1 });
