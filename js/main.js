@@ -381,19 +381,47 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     );
   });
 
-  /* ---------- chips: parallasse leggera ---------- */
-  document.querySelectorAll('.chip').forEach((chip) => {
-    const depth = parseFloat(chip.dataset.depth || 1);
-    gsap.fromTo(
-      chip,
-      { y: 70 * depth },
-      {
-        y: -70 * depth,
-        ease: 'none',
-        scrollTrigger: { trigger: chip.closest('.card'), start: 'top bottom', end: 'bottom top', scrub: true },
-      }
-    );
-  });
+  /* ---------- numeri dell'intro: schiaffo in entrata e conteggio ---------- */
+  const stats = gsap.utils.toArray('.stat');
+  if (stats.length) {
+    /* GSAP azzera le proprieta' CSS rotate/scale quando gestisce il transform:
+       la rotazione da adesivo (--rot) e l'hover li fa GSAP stesso */
+    const rotStat = (el) => parseFloat(getComputedStyle(el).getPropertyValue('--rot')) || 0;
+    gsap.set(stats, { transformOrigin: '50% 60%', rotation: (i, el) => rotStat(el) });
+    if (isFinePointer) {
+      stats.forEach((s) => {
+        s.addEventListener('pointerenter', () => gsap.to(s, { rotation: 0, scale: 1.04, duration: 0.3, ease: 'back.out(2)', overwrite: 'auto' }));
+        s.addEventListener('pointerleave', () => gsap.to(s, { rotation: rotStat(s), scale: 1, duration: 0.35, ease: 'power2.out', overwrite: 'auto' }));
+      });
+    }
+    ScrollTrigger.create({
+      trigger: '.stats',
+      start: 'top 88%',
+      once: true,
+      onEnter: () => {
+        gsap.from(stats, {
+          scale: 0, autoAlpha: 0,
+          rotation: (i, el) => rotStat(el) + (i % 2 ? 28 : -28),
+          duration: 0.6, ease: 'back.out(1.8)', stagger: 0.09,
+        });
+        stats.forEach((s, i) => {
+          const num = s.querySelector('.stat__num');
+          if (num.dataset.count == null) {
+            gsap.from(num, { scale: 0.3, rotation: -90, duration: 0.9, ease: 'elastic.out(1, 0.45)', delay: 0.45 + i * 0.09 });
+            return;
+          }
+          const fine = parseInt(num.dataset.count, 10);
+          const suff = num.dataset.suffix || '';
+          const o = { n: 0 };
+          num.textContent = '0' + suff;
+          gsap.to(o, {
+            n: fine, duration: 1.3, delay: 0.3 + i * 0.09, ease: 'power2.out', snap: 'n',
+            onUpdate: () => (num.textContent = Math.round(o.n) + suff),
+          });
+        });
+      },
+    });
+  }
 
   /* ---------- marquee ---------- */
   makeMarquee(document.querySelector('.techmarquee-track'), 1, 26);
