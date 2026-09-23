@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luca Salvemini!!! — siti web col botto</title>
+  <meta name="description" content="Portfolio di Luca Salvemini, designer e sviluppatore a Brescia. Siti fatti a mano, animazioni dappertutto, zero template.">
+  <meta property="og:title" content="Luca Salvemini!!! — siti web col botto">
+  <meta property="og:description" content="Siti fatti a mano a Brescia: design, codice e animazioni, zero template.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://lucsal2603.github.io/botto/assets/img/involo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,700;1,800;1,900&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💥</text></svg>">
+</head>
+<body>
+
+  <!-- PRELOADER -->
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader-star" id="preloaderStar"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <a class="logo" href="#" aria-label="Luca Salvemini, torna su">
+      <svg class="logo-star" viewBox="0 0 100 100" aria-hidden="true">
+        <g class="logo-star-spin">
+          <polygon class="star-l1" points=""></polygon>
+          <polygon class="star-l2" points=""></polygon>
+          <polygon class="star-l3" points=""></polygon>
+        </g>
+      </svg>
+      <span class="logo-word">Luca<br>Salvemini<em>!!!</em></span>
+    </a>
+    <nav class="nav" aria-label="principale">
+      <a class="nav-link" href="#progetti">Progetti</a>
+      <a class="nav-link" href="#servizi">Servizi</a>
+      <a class="nav-link" href="#metodo">Metodo</a>
+      <a class="nav-link" href="#contatti">Contatti</a>
+      <a class="nav-cta" href="mailto:lukesalvemini@gmail.com">Scrivimi</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-title-wrap">
+        <h1 class="hero-title">
+          <span class="hero-line hero-line-a" aria-label="Luca"><span class="hero-word">LUCA</span></span>
+          <span class="hero-line hero-line-b" aria-label="Salvemini!!!"><span class="hero-word">SALVEMINI<em>!!!</em></span></span>
+        </h1>
+        <a class="hero-sticker" href="#contatti" aria-label="Siti fatti a mano, a Brescia — contattami">
+          <span class="hs-row"><b class="hs-block hs-lime">SITI</b><b class="hs-block hs-blu">FATTI</b><b class="hs-block hs-rosa">A MANO</b></span>
+          <span class="hs-row"><b class="hs-block hs-verde hs-wide">a brescia</b></span>
+          <span class="hs-row"><b class="hs-block hs-crema hs-wide">senza template</b></span>
+        </a>
+      </div>
+
+      <div class="hero-foot">
+        <div class="hero-eyes" id="heroEyes" aria-hidden="true">
+          <svg viewBox="0 0 240 170">
+            <g class="eyes-arrows">
+              <path class="arr arr-verde" d="M22 118 l-16 22 m0 0 l3 -13 m-3 13 l13 -2" />
+              <path class="arr arr-crema" d="M58 138 l-6 26 m0 0 l-5 -11 m5 11 l11 -6" />
+              <path class="arr arr-rosa" d="M196 128 l16 24 m0 0 l-13 -3 m13 3 l-2 -13" />
+              <path class="arr arr-lime" d="M226 96 l14 -14 m0 0 l-3 12 m3 -12 l-12 3" />
+            </g>
+            <g class="eye eye-left">
+              <ellipse class="ring ring-rosa" cx="78" cy="82" rx="64" ry="74"/>
+              <ellipse class="ring ring-verde" cx="78" cy="82" rx="58" ry="68"/>
+              <ellipse class="ring ring-blu" cx="78" cy="82" rx="52" ry="62"/>
+              <ellipse class="ring ring-crema" cx="78" cy="82" rx="46" ry="56"/>
+              <ellipse class="eye-ball" cx="78" cy="82" rx="40" ry="50"/>
+              <path class="eye-lid" d="M38 82 a40 50 0 0 1 80 0 z"/>
+              <circle class="pupil" cx="78" cy="98" r="14"/>
+            </g>
+            <g class="eye eye-right">
+              <ellipse class="ring ring-lime" cx="162" cy="82" rx="64" ry="74"/>
+              <ellipse class="ring ring-rosa" cx="162" cy="82" rx="58" ry="68"/>
+              <ellipse class="ring ring-verde" cx="162" cy="82" rx="52" ry="62"/>
+              <ellipse class="ring ring-crema" cx="162" cy="82" rx="46" ry="56"/>
+              <ellipse class="eye-ball" cx="162" cy="82" rx="40" ry="50"/>
+              <path class="eye-lid" d="M122 82 a40 50 0 0 1 80 0 z"/>
+              <circle class="pupil" cx="162" cy="98" r="14"/>
+            </g>
+          </svg>
+        </div>
+        <a class="hero-badge" href="#progetti" id="heroBadge" aria-label="Scendi ai progetti">
+          <svg viewBox="0 0 120 120">
+            <defs>
+              <path id="badgeCircle" d="M60,60 m-46,0 a46,46 0 1,1 92,0 a46,46 0 1,1 -92,0"/>
+            </defs>
+            <text class="badge-text"><textPath href="#badgeCircle">FATTO A MANO ✶ DA BRESCIA ✶ CON GSAP ✶ E TANTO CAFFÈ ✶ </textPath></text>
+            <path class="badge-arrow" d="M60 46 v24 m0 0 l-9 -9 m9 9 l9 -9"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="intro">
+      <div class="card card-lime intro-card">
+        <h2 class="intro-title"><span class="it-line">Siti fatti a mano,</span><span class="it-line">che fanno il botto</span></h2>
+        <div class="intro-body">
+          <p class="intro-p">Niente template, niente pagine fotocopia: ogni sito parte da un foglio nero e diventa un piccolo spettacolo. Design, codice e animazioni, tutto cucito a mano a Brescia — perché un sito fermo è un sito che non si ricorda nessuno.</p>
+        </div>
+        <div class="intro-chips" aria-hidden="true">
+          <span class="chip" data-depth="1.4">SITI ALL'ATTIVO · 25+</span>
+          <span class="chip chip-rosa" data-depth="0.8">CLIENTI VERI · 6</span>
+          <span class="chip chip-blu" data-depth="1.1">TEMPLATE USATI · 0</span>
+          <span class="chip" data-depth="0.6">ANIMAZIONI · PERSO IL CONTO</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- LINEUP PROGETTI -->
+    <section class="lineup" id="progetti">
+      <div class="lineup-head">
+        <h2 class="sec-title">La lineup</h2>
+        <span class="sticker sticker-progetti" aria-hidden="true"><span>PROGETTI</span></span>
+      </div>
+
+      <div class="techmarquee" aria-hidden="true">
+        <div class="techmarquee-track">
+          <span class="tm-item">GSAP</span><span class="tm-item tm-alt">LENIS</span><span class="tm-item">SCROLLTRIGGER</span><span class="tm-item tm-alt">THREE.JS</span><span class="tm-item">NEXT.JS</span><span class="tm-item tm-alt">SUPABASE</span><span class="tm-item">TAILWIND</span><span class="tm-item tm-alt">BLENDER</span><span class="tm-item">FIGMA</span><span class="tm-item tm-alt">VERCEL</span>
+        </div>
+      </div>
+
+      <div class="card card-crema lineup-card">
+        <ul class="roster">
+          <li class="roster-row" data-img="assets/img/beatilla.jpg" data-accent="#31A362">
+            <a class="roster-link" href="https://www.agriturismobeatilla.it/" target="_blank" rel="noopener">
+              <span class="roster-name">BEATILLA</span>
+              <span class="roster-cap">Agriturismo con cinque secoli di storia, Mantova — sito cliente</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/manaresi.jpg" data-accent="#FF3EBA">
+            <a class="roster-link" href="https://lucsal2603.github.io/manaresi/" target="_blank" rel="noopener">
+              <span class="roster-name">MANARESI</span>
+              <span class="roster-cap">Cantina sui colli bolognesi, dezoom e scroll animation — sito cliente</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/involo.jpg" data-accent="#4A60FF">
+            <a class="roster-link" href="https://lucsal.it/" target="_blank" rel="noopener">
+              <span class="roster-name">INVOLO</span>
+              <span class="roster-cap">Il portfolio che vola, tredici omini animati — ora su lucsal.it</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/coenfer.jpg" data-accent="#FF3EBA">
+            <a class="roster-link" href="https://lucsal2603.github.io/coenfer-v2/" target="_blank" rel="noopener">
+              <span class="roster-name">COENFER</span>
+              <span class="roster-cap">Inferno editoriale con negozio demo, carrello e cassa finti</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/toniolli.jpg" data-accent="#CEFF00">
+            <a class="roster-link" href="https://lucsal2603.github.io/toniolli/" target="_blank" rel="noopener">
+              <span class="roster-name">TONIOLLI</span>
+              <span class="roster-cap">Cantina in Val di Cembra, altimetro scroll-driven — concept</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/gelsaia.jpg" data-accent="#31A362">
+            <a class="roster-link" href="https://lucsal2603.github.io/gelsaia/" target="_blank" rel="noopener">
+              <span class="roster-name">GELSAIA</span>
+              <span class="roster-cap">Agriturismo al buio: ruota scrubbata e manifesto pinnato — demo</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/granaio.jpg" data-accent="#4A60FF">
+            <a class="roster-link" href="https://lucsal2603.github.io/granaio/" target="_blank" rel="noopener">
+              <span class="roster-name">GRANAIO</span>
+              <span class="roster-cap">Griglie vive, scramble e tessere con fisica vera — demo</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/filari.jpg" data-accent="#FF3EBA">
+            <a class="roster-link" href="https://lucsal2603.github.io/filari/" target="_blank" rel="noopener">
+              <span class="roster-name">FILARI</span>
+              <span class="roster-cap">Il cubo che spara via le lettere dell'hero — demo</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/solco.jpg" data-accent="#CEFF00">
+            <a class="roster-link" href="https://lucsal2603.github.io/solco/" target="_blank" rel="noopener">
+              <span class="roster-name">SOLCO</span>
+              <span class="roster-cap">Card 3D, lettere che cadono e tunnel di profondità — demo</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/semente.jpg" data-accent="#31A362">
+            <a class="roster-link" href="https://lucsal2603.github.io/semente/" target="_blank" rel="noopener">
+              <span class="roster-name">SEMENTE</span>
+              <span class="roster-cap">Zoom dentro il testo knockout, orologio vivo — demo</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/fermoposta.jpg" data-accent="#4A60FF">
+            <a class="roster-link" href="https://lucsal2603.github.io/fermoposta/" target="_blank" rel="noopener">
+              <span class="roster-name">FERMOPOSTA</span>
+              <span class="roster-cap">Una lettera dal podere: busta, francobollo e annullo — demo</span>
+            </a>
+          </li>
+          <li class="roster-row" data-img="assets/img/viaggio.jpg" data-accent="#FF3EBA">
+            <a class="roster-link" href="https://lucsal2603.github.io/viaggio/" target="_blank" rel="noopener">
+              <span class="roster-name">VIAGGIO</span>
+              <span class="roster-cap">La strada è un loop: si guida solo scrollando — demo</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card card-lime host-card">
+        <h3 class="host-title">Dietro a tutto: Luca Salvemini</h3>
+        <p class="host-cap">Designer e sviluppatore a Brescia — un sito per volta, tutto fatto a mano</p>
+      </div>
+
+      <div class="preview-bubble" id="previewBubble" aria-hidden="true">
+        <img id="previewImg" src="" alt="">
+        <span class="preview-tag">APRI ↗</span>
+      </div>
+    </section>
+
+    <!-- TAG MARQUEE -->
+    <section class="tags" aria-hidden="true">
+      <div class="tagrow" data-dir="1">
+        <div class="tagrow-track">
+          <span class="pill pill-a">SITI VETRINA</span>
+          <span class="pill pill-b">E-COMMERCE</span>
+          <span class="pill pill-c">SCROLL ANIMATION</span>
+          <span class="pill pill-d">RESTYLING</span>
+          <span class="pill pill-e">MOTION</span>
+        </div>
+      </div>
+      <div class="tagrow" data-dir="-1">
+        <div class="tagrow-track">
+          <span class="pill pill-c">MICRO-INTERAZIONI</span>
+          <span class="pill pill-e">GSAP</span>
+          <span class="pill pill-a">3D</span>
+          <span class="pill pill-d">AUDIT</span>
+          <span class="pill pill-b">SEO TECNICA</span>
+        </div>
+      </div>
+      <div class="tagrow" data-dir="1">
+        <div class="tagrow-track">
+          <span class="pill pill-d">RESPONSIVE</span>
+          <span class="pill pill-a">COPY</span>
+          <span class="pill pill-e">WEB APP</span>
+          <span class="pill pill-b">PROTOTIPI</span>
+          <span class="pill pill-c">GESTIONALI</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVIZI -->
+    <section class="servizi" id="servizi">
+      <div class="servizi-head">
+        <span class="sticker sticker-servizi" aria-hidden="true"><span>SERVIZI</span></span>
+        <h2 class="sec-title">E per il tuo sito,<br>cosa facciamo?</h2>
+      </div>
+
+      <div class="venue-grid">
+        <article class="card card-lime venue">
+          <h3 class="venue-title">Vetrina<br>su misura</h3>
+          <p class="venue-p">Il sito che presenta la tua attività come merita: disegnato da zero, scritto bene, animato meglio. Una vetrina che non sembra quella di nessun altro.</p>
+          <a class="btn-slap" href="#contatti"><span class="btn-arrow">↗</span><span class="btn-label">PARLIAMONE</span></a>
+        </article>
+        <figure class="venue-media" data-speed="0.9">
+          <img src="assets/img/manaresi.jpg" alt="Il sito Manaresi, cantina sui colli bolognesi" loading="lazy">
+        </figure>
+
+        <figure class="venue-media venue-media-b" data-speed="1.05">
+          <img src="assets/img/coenfer.jpg" alt="CoEnfer, negozio demo" loading="lazy">
+        </figure>
+        <article class="card card-rosa venue">
+          <h3 class="venue-title">Negozio<br>leggero</h3>
+          <p class="venue-p">E-commerce essenziali che si caricano in un lampo e accompagnano all'acquisto senza attriti. Poche pagine, fatte benissimo.</p>
+          <a class="btn-slap" href="#contatti"><span class="btn-arrow">↗</span><span class="btn-label">PARLIAMONE</span></a>
+        </article>
+
+        <article class="card card-blu venue">
+          <h3 class="venue-title">Motion e<br>micro-interazioni</h3>
+          <p class="venue-p">Scroll animation, hover, transizioni: il movimento giusto al momento giusto, mai a caso. È la parte che fa dire "oh" a chi guarda.</p>
+          <a class="btn-slap" href="#contatti"><span class="btn-arrow">↗</span><span class="btn-label">PARLIAMONE</span></a>
+        </article>
+        <figure class="venue-media" data-speed="0.92">
+          <img src="assets/img/filari.jpg" alt="Filari, tipografia che esplode" loading="lazy">
+        </figure>
+
+        <figure class="venue-media venue-media-b" data-speed="1.08">
+          <img src="assets/img/toniolli.jpg" alt="Toniolli, concept per una cantina di montagna" loading="lazy">
+        </figure>
+        <article class="card card-verde venue">
+          <h3 class="venue-title">Restyling<br>e check-up</h3>
+          <p class="venue-p">Il tuo sito è fermo da anni? Analisi completa, restyling e rimessa in moto: si riparte più veloci, più belli e più trovabili di prima.</p>
+          <a class="btn-slap" href="#contatti"><span class="btn-arrow">↗</span><span class="btn-label">PARLIAMONE</span></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- METODO -->
+    <section class="metodo" id="metodo">
+      <div class="card card-crema metodo-card">
+        <p class="metodo-eyebrow">Il metodo</p>
+
+        <div class="metodo-block">
+          <h3 class="metodo-title">Quattro mosse, un botto</h3>
+          <div class="metodo-row">
+            <span class="metodo-label">Si parla</span>
+            <p class="metodo-desc">Ci sentiamo, guardo la tua attività e capiamo insieme dove vuoi arrivare.</p>
+          </div>
+          <div class="metodo-row">
+            <span class="metodo-label">Si disegna</span>
+            <p class="metodo-desc">Struttura, testi e stile, cuciti su misura sulla tua attività.</p>
+          </div>
+          <div class="metodo-row">
+            <span class="metodo-label">Si costruisce</span>
+            <p class="metodo-desc">Il sito prende forma a mano, animazioni comprese, e te lo mostro mentre cresce.</p>
+          </div>
+          <div class="metodo-row">
+            <span class="metodo-label">Si va online</span>
+            <p class="metodo-desc">Dominio, messa a punto e piccole correzioni comprese. E poi si festeggia.</p>
+          </div>
+        </div>
+
+        <div class="metodo-block">
+          <h3 class="metodo-title">La cassetta degli attrezzi</h3>
+          <div class="metodo-row">
+            <span class="metodo-label">Linguaggi</span>
+            <div class="tool-list"><span class="tool">HTML</span><span class="tool">CSS</span><span class="tool">JAVASCRIPT</span><span class="tool">TYPESCRIPT</span></div>
+          </div>
+          <div class="metodo-row">
+            <span class="metodo-label">Animazione</span>
+            <div class="tool-list"><span class="tool">GSAP</span><span class="tool">SCROLLTRIGGER</span><span class="tool">LENIS</span><span class="tool">THREE.JS</span></div>
+          </div>
+          <div class="metodo-row">
+            <span class="metodo-label">Framework</span>
+            <div class="tool-list"><span class="tool">NEXT.JS</span><span class="tool">REACT</span><span class="tool">TAILWIND</span></div>
+          </div>
+          <div class="metodo-row">
+            <span class="metodo-label">Backend</span>
+            <div class="tool-list"><span class="tool">SUPABASE</span><span class="tool">NODE</span><span class="tool">VERCEL</span></div>
+          </div>
+          <div class="metodo-row">
+            <span class="metodo-label">Strumenti</span>
+            <div class="tool-list"><span class="tool">FIGMA</span><span class="tool">BLENDER</span><span class="tool">GIT</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTATTI -->
+    <section class="contatti" id="contatti">
+      <div class="card card-nera contact-card">
+        <div class="contact-copy">
+          <h2 class="contact-title"><span id="typeTarget"></span><span class="type-cursor" id="typeCursor"></span></h2>
+          <p class="contact-sub">Scrivimi due righe sulla tua attività: rispondo io, non un modulo.</p>
+        </div>
+        <div class="contact-action">
+          <a class="contact-mail" href="mailto:lukesalvemini@gmail.com">
+            <span class="contact-mail-text">lukesalvemini@gmail.com</span>
+            <span class="contact-mail-arrow">↗</span>
+          </a>
+          <p class="contact-note">Oppure su LinkedIn e Instagram, dove rispondo comunque io.</p>
+        </div>
+
+        <div class="stickerpile" id="stickerpile" aria-hidden="true">
+          <div class="stk stk-circle" data-rot="-14"><svg viewBox="0 0 150 150"><defs><path id="stkC" d="M75,75 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs><text><textPath href="#stkC">LUCA SALVEMINI!!! ✶ SITI COL BOTTO ✶ </textPath></text><g class="stk-star-mini"></g></svg></div>
+          <div class="stk stk-bar" data-rot="9"><b class="hs-block hs-blu">NIENTE</b><b class="hs-block hs-lime">TEMPLATE</b></div>
+          <div class="stk stk-quote" data-rot="-6"><span>Un sito<br>non è un template.</span><i class="stk-stripes"></i></div>
+          <div class="stk stk-burst" data-rot="12"><span>FATTO<br>A<br>MANO</span></div>
+          <div class="stk stk-arch" data-rot="-11"><span>brescia</span></div>
+          <div class="stk stk-pillw" data-rot="7"><span>Da dove iniziamo?</span></div>
+          <div class="stk stk-burst stk-burst-b" data-rot="-18"><span>MENO<br>SLIDE<br>PIÙ<br>BOTTO</span></div>
+          <div class="stk stk-eyes" data-rot="5"><svg viewBox="0 0 120 90"><g><ellipse cx="40" cy="45" rx="26" ry="32" class="sb-ball"/><path d="M14 45 a26 32 0 0 1 52 0 z" class="sb-lid"/><circle cx="40" cy="55" r="8" class="sb-pupil"/></g><g><ellipse cx="80" cy="45" rx="26" ry="32" class="sb-ball"/><path d="M54 45 a26 32 0 0 1 52 0 z" class="sb-lid"/><circle cx="80" cy="55" r="8" class="sb-pupil"/></g></svg></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-made">Fatto a mano a Brescia da Luca Salvemini</p>
+    <nav class="footer-links" aria-label="social">
+      <a href="mailto:lukesalvemini@gmail.com">Scrivimi</a>
+      <a href="https://www.linkedin.com/in/luca-salvemini" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://www.instagram.com/lucsal.web" target="_blank" rel="noopener">Instagram</a>
+    </nav>
+    <p class="footer-site">lucsal.it</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/InertiaPlugin.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
