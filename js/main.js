@@ -146,14 +146,23 @@ lenis.on('scroll', ScrollTrigger.update);
 gsap.ticker.add((time) => lenis.raf(time * 1000));
 gsap.ticker.lagSmoothing(0);
 
+/* ancore: corsa calma, durata in base alla distanza, curva in-out che parte piano e frena dolce */
+const riduciMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const corsaCalma = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+function vaiA(target) {
+  const destinazione = target === 0 ? 0 : target.getBoundingClientRect().top + window.scrollY - 70;
+  const distanza = Math.abs(destinazione - window.scrollY);
+  const durata = gsap.utils.clamp(1.6, 3.2, 1.2 + distanza / 1800);
+  lenis.scrollTo(target, { offset: target === 0 ? 0 : -70, duration: durata, easing: corsaCalma, immediate: riduciMovimento });
+}
 document.querySelectorAll('a[href^="#"]').forEach((a) => {
   a.addEventListener('click', (e) => {
     const id = a.getAttribute('href');
-    if (id.length < 2) return;
+    if (id === '#') { e.preventDefault(); vaiA(0); return; }
     const target = document.querySelector(id);
     if (!target) return;
     e.preventDefault();
-    lenis.scrollTo(target, { offset: -70, duration: 1.4 });
+    vaiA(target);
   });
 });
 
