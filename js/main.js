@@ -236,8 +236,37 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
         clearProps: 'transform',
       }, 'boom+=1.05')
       .to('.hero-eyes', { scale: 1, duration: 0.65, ease: 'back.out(1.9)' }, 'boom+=1.15')
-      .to('.hero-badge', { autoAlpha: 1, duration: 0.5, ease: 'power1.out' }, 'boom+=1.3');
+      .to('.hero-badge', { autoAlpha: 1, duration: 0.5, ease: 'power1.out', onComplete: abilitaLettere }, 'boom+=1.3');
   });
+
+  /* ---------- lettere dell'hero: salto e onda al passaggio del mouse ---------- */
+  const PALETTE_LETTERE = ['#CEFF00', '#FF3EBA', '#4A60FF', '#0099FF', '#31A362'];
+  let lettereAttive = false;
+  function abilitaLettere() {
+    if (lettereAttive || !isFinePointer) return;
+    lettereAttive = true;
+    gsap.set('.hero-line', { overflow: 'visible' });
+    splitHero.forEach((split) => {
+      const chars = split.chars;
+      gsap.set(chars, { transformOrigin: '50% 100%' });
+      chars.forEach((ch, i) => {
+        ch.addEventListener('pointerenter', (e) => {
+          if (e.pointerType && e.pointerType !== 'mouse') return;
+          gsap.timeline({ defaults: { overwrite: 'auto' } })
+            .to(ch, { yPercent: -18, scaleX: 1.1, scaleY: 0.88, rotation: gsap.utils.random(-12, 12), color: gsap.utils.random(PALETTE_LETTERE), duration: 0.16, ease: 'power2.out' })
+            .to(ch, { yPercent: 0, scaleX: 1, scaleY: 1, rotation: 0, duration: 1.0, ease: 'elastic.out(1, 0.32)' })
+            .to(ch, { color: '#F7F6EB', duration: 0.7, ease: 'power1.out' }, '-=0.85');
+          [[i - 1, 1], [i + 1, 1], [i - 2, 2], [i + 2, 2]].forEach(([j, d]) => {
+            const vicina = chars[j];
+            if (!vicina) return;
+            gsap.timeline({ delay: d * 0.05, defaults: { overwrite: 'auto' } })
+              .to(vicina, { yPercent: d === 1 ? -8 : -3, duration: 0.16, ease: 'power2.out' })
+              .to(vicina, { yPercent: 0, duration: 0.9, ease: 'elastic.out(1, 0.4)' });
+          });
+        });
+      });
+    });
+  }
 
   /* rotellina del badge */
   gsap.to('.hero-badge svg', { rotation: 360, duration: 16, ease: 'none', repeat: -1 });
