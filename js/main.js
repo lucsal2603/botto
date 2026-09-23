@@ -416,7 +416,7 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
       }
     );
     gsap.fromTo(
-      fig.querySelector('img'),
+      fig.querySelector('img, video'),
       { scale: 1.24 },
       {
         scale: 1.05,
