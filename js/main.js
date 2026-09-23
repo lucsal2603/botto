@@ -571,6 +571,8 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     }
   });
 
+  /* il testo statico nell'HTML serve ai crawler: con il motion attivo parte vuoto e viene scritto */
+  typeTarget.textContent = '';
   const ciclo = async () => {
     ultima = 0;
     await scrivi(FRASI[0]);

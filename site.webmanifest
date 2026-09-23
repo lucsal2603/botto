@@ -1,0 +1,22 @@
+{
+  "name": "Luca Salvemini — Web Developer a Brescia",
+  "short_name": "Luca Salvemini",
+  "description": "Siti web fatti a mano a Brescia: design, codice e animazioni, zero template.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#141414",
+  "theme_color": "#141414",
+  "lang": "it",
+  "icons": [
+    {
+      "src": "assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "assets/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
