@@ -36,6 +36,24 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
   });
 })();
 
+/* ---------- pill del marquee: due facce per il flip in hover ---------- */
+(function buildPills() {
+  document.querySelectorAll('.pill').forEach((p) => {
+    const txt = p.textContent.trim();
+    const inner = document.createElement('span');
+    inner.className = 'pill__inner';
+    const front = document.createElement('span');
+    front.className = 'pill__face pill__front';
+    front.textContent = txt;
+    const back = document.createElement('span');
+    back.className = 'pill__face pill__back';
+    back.textContent = txt;
+    inner.append(front, back);
+    p.textContent = '';
+    p.appendChild(inner);
+  });
+})();
+
 /* ---------- preloader: la bomba ---------- */
 function buildPreloaderStar() {
   const host = document.getElementById('preloaderStar');
@@ -419,6 +437,39 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
 
   return () => {
     marqueeTweens.length = 0;
+  };
+});
+
+/* ============================================================
+   SCHERMO: le quattro mosse compaiono come fogli (solo desktop)
+   ============================================================ */
+mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
+  const schermo = document.getElementById('schermo');
+  if (!schermo) return;
+  schermo.classList.add('is-scroll');
+  const fogli = gsap.utils.toArray('.foglio');
+  /* in modalità scroll la rotazione la gestisce GSAP (transform), non il CSS */
+  fogli.forEach((f) => (f.style.rotate = '0deg'));
+  gsap.set('#schermoParola', { transformOrigin: '50% 50%' });
+
+  const tl = gsap.timeline({
+    scrollTrigger: { trigger: '.schermo', start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true },
+  });
+  tl.to('.schermo__scorri', { autoAlpha: 0, duration: 0.05 }, 0.03)
+    .to('#schermoParola', { scale: 16, ease: 'power2.in', duration: 0.5 }, 0)
+    .to('#schermoParola', { autoAlpha: 0, ease: 'none', duration: 0.06 }, 0.44)
+    .to('#schermoTelone', { autoAlpha: 1, ease: 'none', duration: 0.1 }, 0.42)
+    .fromTo(fogli,
+      { autoAlpha: 0, scale: 0.5, y: 70, rotation: (i) => (i % 2 ? 16 : -16) },
+      {
+        autoAlpha: 1, scale: 1, y: 0,
+        rotation: (i) => parseFloat(getComputedStyle(fogli[i]).getPropertyValue('--rot')) || 0,
+        stagger: 0.1, duration: 0.14, ease: 'back.out(1.6)',
+      }, 0.54);
+
+  return () => {
+    schermo.classList.remove('is-scroll');
+    fogli.forEach((f) => (f.style.rotate = ''));
   };
 });
 

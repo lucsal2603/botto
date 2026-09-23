@@ -279,15 +279,6 @@
           <img src="assets/img/manaresi.jpg" alt="Il sito Manaresi, cantina sui colli bolognesi" loading="lazy">
         </figure>
 
-        <figure class="venue-media venue-media-b" data-speed="1.05">
-          <img src="assets/img/coenfer.jpg" alt="CoEnfer, negozio demo" loading="lazy">
-        </figure>
-        <article class="card card-rosa venue">
-          <h3 class="venue-title">Negozio<br>leggero</h3>
-          <p class="venue-p">E-commerce essenziali che si caricano in un lampo e accompagnano all'acquisto senza attriti. Poche pagine, fatte benissimo.</p>
-          <a class="btn-slap" href="#contatti"><span class="btn-arrow">↗</span><span class="btn-label">PARLIAMONE</span></a>
-        </article>
-
         <article class="card card-blu venue">
           <h3 class="venue-title">Motion e<br>micro-interazioni</h3>
           <p class="venue-p">Scroll animation, hover, transizioni: il movimento giusto al momento giusto, mai a caso. È la parte che fa dire "oh" a chi guarda.</p>
@@ -310,29 +301,37 @@
 
     <!-- METODO -->
     <section class="metodo" id="metodo">
-      <div class="card card-crema metodo-card">
-        <p class="metodo-eyebrow">Il metodo</p>
-
-        <div class="metodo-block">
-          <h3 class="metodo-title">Quattro mosse, un botto</h3>
-          <div class="metodo-row">
-            <span class="metodo-label">Si parla</span>
-            <p class="metodo-desc">Ci sentiamo, guardo la tua attività e capiamo insieme dove vuoi arrivare.</p>
-          </div>
-          <div class="metodo-row">
-            <span class="metodo-label">Si disegna</span>
-            <p class="metodo-desc">Struttura, testi e stile, cuciti su misura sulla tua attività.</p>
-          </div>
-          <div class="metodo-row">
-            <span class="metodo-label">Si costruisce</span>
-            <p class="metodo-desc">Il sito prende forma a mano, animazioni comprese, e te lo mostro mentre cresce.</p>
-          </div>
-          <div class="metodo-row">
-            <span class="metodo-label">Si va online</span>
-            <p class="metodo-desc">Dominio, messa a punto e piccole correzioni comprese. E poi si festeggia.</p>
+      <!-- SCHERMO: le quattro mosse compaiono come fogli scrollando (alla semente) -->
+      <div class="schermo" id="schermo">
+        <div class="schermo__pin">
+          <h2 class="schermo__parola" id="schermoParola">IL METODO</h2>
+          <p class="schermo__scorri">SCORRI<span class="schermo__filo"></span></p>
+          <div class="schermo__telone" id="schermoTelone">
+            <h3 class="schermo__titolo">Quattro mosse,<br>un botto</h3>
+            <div class="schermo__fogli">
+              <article class="foglio foglio-lime" style="--x:5%; --y:26%; --rot:-6deg;">
+                <span class="foglio__nome">Si parla</span>
+                <p class="foglio__desc">Ci sentiamo, guardo la tua attività e capiamo insieme dove vuoi arrivare.</p>
+              </article>
+              <article class="foglio foglio-rosa" style="--x:56%; --y:19%; --rot:5deg;">
+                <span class="foglio__nome">Si disegna</span>
+                <p class="foglio__desc">Struttura, testi e stile, cuciti su misura sulla tua attività.</p>
+              </article>
+              <article class="foglio foglio-blu" style="--x:8%; --y:60%; --rot:4deg;">
+                <span class="foglio__nome">Si costruisce</span>
+                <p class="foglio__desc">Il sito prende forma a mano, animazioni comprese, e te lo mostro mentre cresce.</p>
+              </article>
+              <article class="foglio foglio-verde" style="--x:57%; --y:55%; --rot:-5deg;">
+                <span class="foglio__nome">Si va online</span>
+                <p class="foglio__desc">Dominio, messa a punto e piccole correzioni comprese. E poi si festeggia.</p>
+              </article>
+            </div>
           </div>
         </div>
+      </div>
 
+      <!-- cassetta degli attrezzi -->
+      <div class="card card-crema metodo-card">
         <div class="metodo-block">
           <h3 class="metodo-title">La cassetta degli attrezzi</h3>
           <div class="metodo-row">
