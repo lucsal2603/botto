@@ -149,7 +149,7 @@ ul { list-style: none; }
 }
 .hero-line { display: block; overflow: hidden; padding: 0.06em 0.06em 0.02em; }
 .hero-word { display: inline-block; white-space: nowrap; }
-.hero-line-a { font-size: clamp(90px, 23.5vw, 350px); }
+.hero-line-a { font-size: clamp(110px, 28.5vw, 430px); }
 .hero-line-b { font-size: clamp(42px, 10.5vw, 158px); }
 .hero-line-b em { font-style: italic; }
 .hero-word .ch { display: inline-block; }
@@ -707,7 +707,7 @@ ul { list-style: none; }
   .hero-title-wrap { margin-top: 8vh; }
   .hero-sticker { top: -16%; }
   .hero-foot { margin-top: auto; }
-  .hero-line-a { font-size: clamp(90px, 22vw, 350px); }
+  .hero-line-a { font-size: clamp(96px, 31vw, 430px); }
   .venue-grid { display: flex; flex-direction: column; }
   .venue-grid > *:nth-child(1) { order: 1; }
   .venue-grid > *:nth-child(2) { order: 2; }
