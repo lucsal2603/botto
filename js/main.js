@@ -407,10 +407,9 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     const speed = parseFloat(fig.dataset.speed || 1);
     gsap.fromTo(
       fig,
-      { y: 60 * speed, scale: 0.88 },
+      { y: 30 * speed },
       {
-        y: -60 * speed,
-        scale: 1,
+        y: -30 * speed,
         ease: 'none',
         scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: true },
       }

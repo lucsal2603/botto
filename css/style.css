@@ -457,32 +457,38 @@ html.has-glove, html.has-glove * { cursor: none !important; }
   gap: clamp(18px, 3vw, 44px);
   padding: 0 var(--gap-edge) clamp(40px, 6vw, 90px);
 }
+/* misure di designbomb a 1440px: card 572 x 598, foto 812 x 598, 24px tra i blocchi */
 .venue-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gap-edge);
+  gap: 24px;
   padding: 0 var(--gap-edge);
 }
-.venue-grid > * { margin: 0; }
+.venue-row {
+  display: grid;
+  grid-template-columns: 572fr 812fr;
+  gap: 24px;
+}
+.venue-row--inv { grid-template-columns: 812fr 572fr; }
+.venue-row > * { margin: 0; }
 .venue {
-  padding: clamp(24px, 3vw, 44px);
-  min-height: clamp(380px, 44vw, 620px);
+  padding: 16px;
+  min-height: clamp(420px, 41.5vw, 640px);
   display: flex;
   flex-direction: column;
 }
 .venue-title {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: clamp(38px, 4.6vw, 72px);
-  line-height: 1.02;
-  letter-spacing: -0.045em;
+  font-size: clamp(52px, 7.78vw, 112px);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
 }
 .venue-p {
   margin-top: auto;
   padding-top: 24px;
-  max-width: 480px;
-  font-size: clamp(15px, 1.3vw, 19px);
-  line-height: 1.45;
+  max-width: none;
+  font-size: 18px;
+  line-height: 1.3;
   letter-spacing: -0.03em;
 }
 .card-blu .venue-p, .card-verde .venue-p { color: var(--crema); }
@@ -520,12 +526,10 @@ html.has-glove, html.has-glove * { cursor: none !important; }
 .btn-slap:active .btn-label { transform: scale(0.97); }
 
 .venue-media {
-  border-radius: 50%;
+  border-radius: 9999px;
   overflow: clip;
-  aspect-ratio: 1;
-  align-self: center;
-  justify-self: center;
-  width: min(100%, 620px);
+  width: 100%;
+  min-height: 0;
 }
 .venue-media img, .venue-media video { width: 100%; height: 100%; object-fit: cover; object-position: top; transform: scale(1.12); display: block; }
 
@@ -833,15 +837,10 @@ html.has-glove, html.has-glove * { cursor: none !important; }
   .hero-sticker { top: -16%; }
   .hero-foot { margin-top: auto; }
   .hero-line-a { font-size: clamp(96px, 31vw, 430px); }
-  .venue-grid { display: flex; flex-direction: column; }
-  .venue-grid > *:nth-child(1) { order: 1; }
-  .venue-grid > *:nth-child(2) { order: 2; }
-  .venue-grid > *:nth-child(4) { order: 3; }
-  .venue-grid > *:nth-child(3) { order: 4; }
-  .venue-grid > *:nth-child(5) { order: 5; }
-  .venue-grid > *:nth-child(6) { order: 6; }
+  .venue-row, .venue-row--inv { grid-template-columns: 1fr; gap: 16px; }
+  .venue-row .venue { order: 1; }
+  .venue-row .venue-media { order: 2; aspect-ratio: 812 / 598; }
   .venue { min-height: 0; }
-  .venue-media { width: min(78vw, 420px); }
   .contact-card { padding-bottom: clamp(360px, 90vw, 520px); }
   .contact-action { position: static; width: 100%; margin-top: 30px; }
   .stickerpile { height: clamp(320px, 80vw, 460px); }
