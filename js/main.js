@@ -439,20 +439,76 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     });
   });
 
-  /* ---------- contatti: macchina da scrivere ---------- */
+  /* ---------- contatti: macchina da scrivere in ciclo ---------- */
   const typeTarget = document.getElementById('typeTarget');
   const cursor = document.getElementById('typeCursor');
-  const phrase = 'Il prossimo botto è il tuo sito.';
-  gsap.to(cursor, { opacity: 0, duration: 0.55, ease: 'steps(1)', repeat: -1, yoyo: true });
+  const FRASI = [
+    'Il prossimo botto è il tuo sito.',
+    'Niente template, promesso.',
+    'Facciamo il botto insieme?',
+    'Un sito che si fa ricordare.',
+    'Scrivimi, rispondo io.',
+    'Animazioni dappertutto.',
+    'Fatto a mano, a Brescia.',
+    'Zero fotocopie, solo botti.',
+    'Il tuo sito merita di più.',
+    'Partiamo da un foglio nero.',
+  ];
+  const lampeggio = gsap.to(cursor, { opacity: 0, duration: 0.55, ease: 'steps(1)', repeat: -1, yoyo: true, paused: true });
+  const cursoreFisso = () => { lampeggio.pause(); gsap.set(cursor, { opacity: 1 }); };
+  const cursoreLampeggia = () => lampeggio.play();
+  cursoreLampeggia();
+
+  let visibile = false;
+  let partita = false;
+  let sacchetto = [];
+  let ultima = -1;
+  const pesca = () => {
+    if (!sacchetto.length) sacchetto = FRASI.map((_, i) => i).filter((i) => i !== ultima);
+    const k = Math.floor(Math.random() * sacchetto.length);
+    ultima = sacchetto.splice(k, 1)[0];
+    return FRASI[ultima];
+  };
+  const attendi = (s) => new Promise((ok) => gsap.delayedCall(s, ok));
+  const finoAVisibile = async () => { while (!visibile) await attendi(0.4); };
+
+  const scrivi = (testo) => new Promise((ok) => {
+    cursoreFisso();
+    const tl = gsap.timeline({ onComplete: ok });
+    for (let i = 1; i <= testo.length; i++) {
+      tl.call(() => (typeTarget.textContent = testo.slice(0, i)), null, i * 0.045);
+    }
+  });
+  const cancella = () => new Promise((ok) => {
+    cursoreFisso();
+    const testo = typeTarget.textContent;
+    const tl = gsap.timeline({ onComplete: ok });
+    for (let i = testo.length - 1; i >= 0; i--) {
+      tl.call(() => (typeTarget.textContent = testo.slice(0, i)), null, (testo.length - i) * 0.026);
+    }
+  });
+
+  const ciclo = async () => {
+    ultima = 0;
+    await scrivi(FRASI[0]);
+    for (;;) {
+      cursoreLampeggia();
+      await attendi(3.6);
+      await finoAVisibile();
+      await cancella();
+      await attendi(0.35);
+      await finoAVisibile();
+      await scrivi(pesca());
+    }
+  };
+
   ScrollTrigger.create({
     trigger: '.contact-card',
-    start: 'top 70%',
-    once: true,
-    onEnter: () => {
-      const tl = gsap.timeline();
-      for (let i = 1; i <= phrase.length; i++) {
-        tl.call(() => (typeTarget.textContent = phrase.slice(0, i)), null, i * 0.045);
-      }
+    start: 'top 80%',
+    end: 'bottom top',
+    onToggle: (self) => {
+      visibile = self.isActive;
+      if (visibile && !partita) { partita = true; ciclo(); }
     },
   });
 
