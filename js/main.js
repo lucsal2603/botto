@@ -54,6 +54,65 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
   });
 })();
 
+/* ---------- cursore: il guanto che punta (solo con un mouse vero) ---------- */
+(function glove() {
+  if (!isFinePointer) return;
+  const g = document.getElementById('guanto');
+  if (!g) return;
+  const SIZE = 52;
+  const TIP_X = 0.33 * SIZE;
+  const TIP_Y = 0.24 * SIZE;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hot = 'a, button, .pill, .stk, .roster-row, .hero-badge, input, textarea';
+  gsap.set(g, { transformOrigin: '33% 24%' });
+  const xTo = gsap.quickTo(g, 'x', { duration: reduce ? 0 : 0.11, ease: 'power3' });
+  const yTo = gsap.quickTo(g, 'y', { duration: reduce ? 0 : 0.11, ease: 'power3' });
+  const rTo = gsap.quickTo(g, 'rotation', { duration: 0.35, ease: 'power2' });
+  let lastX = null;
+  let shown = false;
+  let hoverScale = 1;
+
+  window.addEventListener('mousemove', (e) => {
+    xTo(e.clientX - TIP_X);
+    yTo(e.clientY - TIP_Y);
+    if (!reduce) {
+      const dx = lastX == null ? 0 : e.clientX - lastX;
+      rTo(gsap.utils.clamp(-16, 16, dx * 0.9));
+      lastX = e.clientX;
+    }
+    if (!shown) {
+      shown = true;
+      document.documentElement.classList.add('has-glove');
+      gsap.to(g, { autoAlpha: 1, duration: 0.2, overwrite: 'auto' });
+    }
+  }, { passive: true });
+
+  document.addEventListener('mouseleave', () => {
+    shown = false;
+    gsap.to(g, { autoAlpha: 0, duration: 0.2, overwrite: 'auto' });
+  });
+
+  document.addEventListener('mouseover', (e) => {
+    if (!e.target.closest(hot)) return;
+    hoverScale = 1.18;
+    gsap.to(g, { scaleX: hoverScale, scaleY: hoverScale, duration: 0.22, ease: 'back.out(2)', overwrite: 'auto' });
+  });
+  document.addEventListener('mouseout', (e) => {
+    if (!e.target.closest(hot)) return;
+    hoverScale = 1;
+    gsap.to(g, { scaleX: 1, scaleY: 1, duration: 0.25, ease: 'power2.out', overwrite: 'auto' });
+  });
+
+  window.addEventListener('mousedown', () => {
+    if (reduce) return;
+    gsap.to(g, { scaleX: hoverScale * 1.08, scaleY: hoverScale * 0.8, duration: 0.1, overwrite: 'auto' });
+  });
+  window.addEventListener('mouseup', () => {
+    if (reduce) return;
+    gsap.to(g, { scaleX: hoverScale, scaleY: hoverScale, duration: 0.3, ease: 'back.out(2.5)', overwrite: 'auto' });
+  });
+})();
+
 /* ---------- preloader: la bomba ---------- */
 function buildPreloaderStar() {
   const host = document.getElementById('preloaderStar');

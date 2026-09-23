@@ -22,6 +22,21 @@
     <div class="preloader-star" id="preloaderStar"></div>
   </div>
 
+  <!-- CURSORE: guanto che punta (segue il mouse via JS, punta del dito = hotspot) -->
+  <div class="guanto" id="guanto" aria-hidden="true">
+    <svg viewBox="0 0 100 100">
+      <g fill="#111" stroke="#111" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M 58,50 C 64,43 77,41 83,52 C 91,64 90,79 81,87 C 77,91 74,95 66,96 C 56,98 44,93 40,85 C 30,81 25,72 30,66 C 24,60 27,53 34,52 C 30,46 36,41 44,46 Z"/>
+        <line x1="33" y1="24" x2="62" y2="53" stroke-width="29"/>
+      </g>
+      <g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M 58,50 C 64,43 77,41 83,52 C 91,64 90,79 81,87 C 77,91 74,95 66,96 C 56,98 44,93 40,85 C 30,81 25,72 30,66 C 24,60 27,53 34,52 C 30,46 36,41 44,46 Z" stroke-width="0"/>
+        <line x1="33" y1="24" x2="62" y2="53" stroke-width="20"/>
+      </g>
+      <path d="M 39,47 C 47,49 56,53 62,60" fill="none" stroke="#111" stroke-width="4.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+
   <!-- HEADER -->
   <header class="header" id="header">
     <a class="logo" href="#" aria-label="Luca Salvemini, torna su">
