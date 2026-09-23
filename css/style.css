@@ -529,7 +529,6 @@ ul { list-style: none; }
   letter-spacing: -0.04em;
   will-change: transform;
 }
-.schermo__scorri { display: none; }
 .schermo__telone {
   position: relative;
   width: min(1200px, 100%);
@@ -579,25 +578,19 @@ ul { list-style: none; }
 .foglio-blu   { background: var(--blu);   color: var(--crema); }
 .foglio-verde { background: var(--verde); color: var(--crema); }
 
-/* modalita' scroll (attivata dal JS solo su desktop senza reduced-motion) */
-.schermo.is-scroll { height: 360vh; }
+/* modalita' scroll (attivata dal JS solo su desktop senza reduced-motion):
+   lo schermo e' visibile da subito, i fogli compaiono scrollando */
+.schermo.is-scroll { height: 240vh; }
 .schermo.is-scroll .schermo__pin {
   position: sticky; top: 0;
   height: 100vh; overflow: clip;
   display: grid; place-items: center;
   padding: 0;
 }
-.schermo.is-scroll .schermo__parola { position: absolute; font-size: 15vw; }
-.schermo.is-scroll .schermo__scorri {
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  position: absolute; bottom: 8vh; left: 50%; transform: translateX(-50%);
-  font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.22em; color: var(--crema);
-}
-.schermo.is-scroll .schermo__filo { display: block; width: 2px; height: 34px; background: var(--lime); }
+.schermo.is-scroll .schermo__parola { display: none; }
 .schermo.is-scroll .schermo__telone {
   position: absolute; inset: 0; margin: auto;
   width: min(1200px, 92vw); height: min(760px, 82vh);
-  opacity: 0; visibility: hidden;
 }
 .schermo.is-scroll .foglio { opacity: 0; }
 

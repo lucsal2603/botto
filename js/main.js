@@ -450,22 +450,18 @@ mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
   const fogli = gsap.utils.toArray('.foglio');
   /* in modalità scroll la rotazione la gestisce GSAP (transform), non il CSS */
   fogli.forEach((f) => (f.style.rotate = '0deg'));
-  gsap.set('#schermoParola', { transformOrigin: '50% 50%' });
 
   const tl = gsap.timeline({
     scrollTrigger: { trigger: '.schermo', start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true },
   });
-  tl.to('.schermo__scorri', { autoAlpha: 0, duration: 0.05 }, 0.03)
-    .to('#schermoParola', { scale: 16, ease: 'power2.in', duration: 0.5 }, 0)
-    .to('#schermoParola', { autoAlpha: 0, ease: 'none', duration: 0.06 }, 0.44)
-    .to('#schermoTelone', { autoAlpha: 1, ease: 'none', duration: 0.1 }, 0.42)
-    .fromTo(fogli,
+  tl.fromTo(fogli,
       { autoAlpha: 0, scale: 0.5, y: 70, rotation: (i) => (i % 2 ? 16 : -16) },
       {
         autoAlpha: 1, scale: 1, y: 0,
         rotation: (i) => parseFloat(getComputedStyle(fogli[i]).getPropertyValue('--rot')) || 0,
-        stagger: 0.1, duration: 0.14, ease: 'back.out(1.6)',
-      }, 0.54);
+        stagger: 0.14, duration: 0.18, ease: 'back.out(1.6)',
+      }, 0.08)
+    .to({}, { duration: 0.3 });
 
   return () => {
     schermo.classList.remove('is-scroll');
