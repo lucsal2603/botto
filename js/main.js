@@ -447,9 +447,12 @@ mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
   const schermo = document.getElementById('schermo');
   if (!schermo) return;
   schermo.classList.add('is-scroll');
-  const fogli = gsap.utils.toArray('.foglio');
+  const tutti = gsap.utils.toArray('.foglio');
   /* in modalità scroll la rotazione la gestisce GSAP (transform), non il CSS */
-  fogli.forEach((f) => (f.style.rotate = '0deg'));
+  tutti.forEach((f) => (f.style.rotate = '0deg'));
+  const finale = tutti.find((f) => f.classList.contains('foglio--finale'));
+  const fogli = tutti.filter((f) => f !== finale);
+  const rotOf = (el) => parseFloat(getComputedStyle(el).getPropertyValue('--rot')) || 0;
 
   const tl = gsap.timeline({
     scrollTrigger: { trigger: '.schermo', start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true },
@@ -458,10 +461,16 @@ mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
       { autoAlpha: 0, scale: 0.5, y: 70, rotation: (i) => (i % 2 ? 16 : -16) },
       {
         autoAlpha: 1, scale: 1, y: 0,
-        rotation: (i) => parseFloat(getComputedStyle(fogli[i]).getPropertyValue('--rot')) || 0,
+        rotation: (i) => rotOf(fogli[i]),
         stagger: 0.14, duration: 0.18, ease: 'back.out(1.6)',
-      }, 0.08)
-    .to({}, { duration: 0.3 });
+      }, 0.08);
+  if (finale) {
+    tl.fromTo(finale,
+      { autoAlpha: 0, scale: 0.3, y: 40, rotation: -28 },
+      { autoAlpha: 1, scale: 1, y: 0, rotation: rotOf(finale), duration: 0.24, ease: 'back.out(2.2)' },
+      '+=0.08');
+  }
+  tl.to({}, { duration: 0.3 });
 
   return () => {
     schermo.classList.remove('is-scroll');
