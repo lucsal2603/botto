@@ -184,11 +184,13 @@ ul { list-style: none; }
 .hs-wide { width: 100%; text-align: center; }
 
 .hero-foot {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
   padding: 12px 2vw 20px;
 }
+.hero-eyes { grid-column: 2; }
+.hero-badge { grid-column: 3; justify-self: end; }
 .hero-eyes { width: clamp(150px, 17vw, 250px); }
 .hero-eyes svg { width: 100%; overflow: visible; }
 .pupil { fill: var(--nero); }
