@@ -849,16 +849,6 @@ function cassettaFisica() {
   };
 }
 
-/* su telefono la carta occupa tutta la larghezza: lo sticker scherzoso va dopo la pila, non sopra */
-mm.add('(max-width: 900px)', () => {
-  const mossa = document.querySelector('.mossa-segreta');
-  const passi = document.querySelector('.passi');
-  if (!mossa || !passi) return undefined;
-  const casa = mossa.parentElement;
-  passi.after(mossa);
-  return () => casa.append(mossa);
-});
-
 mm.add('(prefers-reduced-motion: no-preference)', () => {
   const sezione = document.querySelector('.metodo');
   if (!sezione) return undefined;
@@ -891,14 +881,6 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     gsap.to(passo, { scale: 0.93, rotation: i % 2 ? 1.4 : -1.4, ease: 'none', scrollTrigger: corsa() });
     gsap.to(passo.querySelector('.passo__velo'), { opacity: 0.38, ease: 'none', scrollTrigger: corsa() });
   });
-
-  const mossa = sezione.querySelector('.mossa-segreta');
-  if (mossa) {
-    gsap.fromTo(mossa,
-      { scale: 1.8, autoAlpha: 0, rotation: -18 },
-      { scale: 1, autoAlpha: 1, rotation: 4, duration: 0.55, ease: 'back.out(2)',
-        scrollTrigger: { trigger: mossa, start: 'top 92%', toggleActions: 'play none none reverse' } });
-  }
 
   /* le animazioni di contorno girano solo quando la sezione e' a schermo */
   ScrollTrigger.create({
