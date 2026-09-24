@@ -574,152 +574,195 @@ html.has-glove, html.has-glove * { cursor: none !important; }
 }
 .venue-media img, .venue-media video { width: 100%; height: 100%; object-fit: cover; object-position: top; transform: scale(1.12); display: block; }
 
-/* ---------- SCHERMO (quattro mosse come fogli, alla semente) ---------- */
-.schermo { position: relative; }
-.schermo__pin { padding: clamp(50px, 7vw, 110px) var(--gap-edge) 0; }
-.schermo__parola {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 900;
-  font-size: clamp(60px, 13vw, 200px);
-  line-height: 0.9;
-  text-align: center;
+/* ---------- METODO: quattro carte che si impilano + cassetta degli attrezzi ---------- */
+/* clip (non hidden): taglia gli sbordi laterali delle animazioni senza creare un contenitore
+   di scroll, cosi' le carte sticky continuano a fermarsi rispetto alla finestra */
+.metodo { padding: clamp(70px, 9vw, 140px) 0 clamp(40px, 5vw, 80px); overflow-x: clip; }
+.metodo-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(16px, 3vw, 40px);
+  padding: 0 var(--gap-edge) clamp(34px, 4.5vw, 70px);
+}
+.sticker-metodo {
+  width: clamp(104px, 10vw, 150px);
+  aspect-ratio: 1;
+  background: var(--rosa);
+  clip-path: polygon(50% 0%, 61% 20%, 80% 7%, 78% 29%, 100% 25%, 87% 44%, 100% 50%, 87% 56%, 100% 75%, 78% 71%, 80% 93%, 61% 80%, 50% 100%, 39% 80%, 20% 93%, 22% 71%, 0% 75%, 13% 56%, 0% 50%, 13% 44%, 0% 25%, 22% 29%, 20% 7%, 39% 20%);
+}
+.sticker-metodo span {
   color: var(--crema);
-  letter-spacing: -0.04em;
-  will-change: transform;
+  font-size: clamp(13px, 1.25vw, 18px);
+  line-height: 0.95;
+  text-align: center;
+  transform: rotate(-8deg);
 }
-.schermo__telone {
-  position: relative;
-  width: min(1200px, 100%);
-  margin: clamp(24px, 3vw, 44px) auto 0;
-  min-height: min(760px, 82vh);
-  background: var(--nero-2);
-  border: 3px solid var(--crema);
-  border-radius: 22px;
-  box-shadow: 0 0 0 6px var(--nero);
+
+/* la pila: ogni carta si ferma un gradino piu' in basso della precedente e la copre */
+.passi {
+  --top0: 88px;
+  --scalino: 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--gap-edge);
+}
+.passo__ancora { display: block; height: 0; }
+.passo {
+  position: sticky;
+  top: calc(var(--top0) + var(--i) * var(--scalino));
+  z-index: calc(1 + var(--i));
+  height: min(74vh, 660px);
+  margin-bottom: 9vh;
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: clamp(16px, 2vw, 32px);
+  padding: clamp(20px, 2.4vw, 36px);
+  border-radius: var(--radius);
   overflow: clip;
-}
-.schermo__fogli { position: absolute; inset: 0; }
-.foglio {
-  position: absolute;
-  left: var(--x); top: var(--y);
-  width: min(300px, 40%);
-  rotate: var(--rot);
-  border-radius: 12px;
-  border: 2px solid var(--nero);
-  padding: clamp(14px, 1.5vw, 22px);
-  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
+  transform-origin: 50% 0%;
   will-change: transform;
 }
-.foglio__nome {
-  display: block;
+.passo:last-of-type { margin-bottom: 0; }
+.passo--lime  { background: var(--lime);  color: var(--nero); }
+.passo--rosa  { background: var(--rosa);  color: var(--nero); }
+.passo--blu   { background: var(--blu);   color: var(--crema); }
+.passo--verde { background: var(--verde); color: var(--nero); }
+.passo--blu .passo__nome, .passo--verde .passo__nome { color: var(--lime); }
+
+.passo__testo { position: relative; z-index: 1; display: flex; flex-direction: column; min-height: 0; }
+.passo__nome {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 900;
-  font-size: clamp(20px, 2vw, 30px);
-  letter-spacing: -0.02em;
+  font-size: clamp(56px, 8.8vw, 150px);
+  line-height: 0.86;
+  letter-spacing: -0.04em;
 }
-.foglio__desc { margin-top: 8px; font-size: clamp(13px, 1.05vw, 16px); line-height: 1.35; letter-spacing: -0.02em; }
-.foglio-lime  { background: var(--lime);  color: var(--nero); }
-.foglio-rosa  { background: var(--rosa);  color: var(--crema); }
-.foglio-blu   { background: var(--blu);   color: var(--crema); }
-.foglio-verde { background: var(--verde); color: var(--crema); }
-/* quinto foglio: al centro, sopra tutto, arriva per ultimo */
-.foglio--finale {
+.passo__desc {
+  margin-top: auto;
+  padding-top: 20px;
+  max-width: 34ch;
+  font-size: clamp(16px, 1.4vw, 21px);
+  line-height: 1.35;
+  letter-spacing: -0.03em;
+}
+.passo__cosa { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.passo__cosa li {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 800;
+  font-size: clamp(12px, 0.95vw, 15px);
+  letter-spacing: -0.01em;
+  padding: 0.5em 1em 0.55em;
+  border: 2px solid currentColor;
+  border-radius: 999px;
+}
+.passo__scena { position: relative; z-index: 1; display: grid; place-items: center; min-height: 0; }
+.scena { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.passo__velo { position: absolute; inset: 0; z-index: 2; background: var(--nero); opacity: 0; pointer-events: none; }
+
+.fumetto__txt { font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 31px; letter-spacing: -0.02em; fill: var(--nero); }
+.fumetto__txt--b { font-size: 30px; fill: var(--crema); }
+.editor__tab { font-family: var(--font-body); font-weight: 600; font-size: 12.5px; fill: var(--nero); }
+.adesivo-codice__txt { font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 36px; fill: var(--blu); }
+.nastro__txt { font-family: var(--font-display); font-style: italic; font-weight: 900; font-size: 40px; letter-spacing: -0.02em; fill: var(--rosa); }
+
+/* coda della pila: il tempo di vederla completa, e lo sticker che ci finisce sopra */
+.passi__coda { position: relative; z-index: 10; height: 40vh; pointer-events: none; }
+.mossa-segreta {
+  position: absolute;
+  /* a fine sosta atterra poco sotto il nome dell'ultima carta:
+     altezza coda - altezza carta + padding + due righe di nome + respiro */
+  top: calc(40vh - min(74vh, 660px) + clamp(20px, 2.4vw, 36px) + 1.72 * clamp(56px, 8.8vw, 150px) + 18px);
+  left: 27%;
+  width: min(320px, 27vw);
+  padding: 13px 18px 15px;
   background: var(--crema);
   color: var(--nero);
-  width: min(340px, 44%);
-  translate: -50% -50%;
-  border-width: 3px;
-  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
-  z-index: 3;
+  border-radius: 14px;
+  font-size: clamp(13px, 1.05vw, 16px);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+  rotate: 4deg;
+}
+/* su telefono lo sticker viene spostato dal JS subito dopo la pila, in mezzo al flusso */
+.metodo > .mossa-segreta { position: relative; top: auto; left: auto; display: block; width: min(340px, 86vw); margin: 28px auto 0; }
+.mossa-segreta b {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(16px, 1.4vw, 22px);
 }
 
-/* modalita' scroll (attivata dal JS solo su desktop senza reduced-motion):
-   "IL METODO" resta fisso al centro e i fogli compaiono attorno alla scritta */
-.schermo.is-scroll { height: 240vh; }
-.schermo.is-scroll .schermo__pin {
-  position: sticky; top: 0;
-  height: 100vh; overflow: clip;
-  display: grid; place-items: center;
-  padding: 0;
+/* cassetta degli attrezzi: senza fisica e' una fila di pillole, con la fisica cadono e si lanciano */
+.cassetta { margin-top: clamp(24px, 3vw, 44px); padding: clamp(24px, 3vw, 44px); }
+.cassetta__testa { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 30px; }
+.cassetta__titolo { font-family: var(--font-body); font-weight: 400; font-size: clamp(30px, 3.6vw, 56px); line-height: 1; letter-spacing: -0.045em; }
+.cassetta__nota { max-width: 42ch; font-size: clamp(15px, 1.2vw, 18px); line-height: 1.4; letter-spacing: -0.02em; }
+.cassetta__invito { display: none; }
+.cassetta.is-viva .cassetta__invito { display: inline; }
+.cassetta__box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: clamp(20px, 2.6vw, 36px);
+  list-style: none;
 }
-.schermo.is-scroll .schermo__parola {
+.attrezzo {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0.5em 0.95em 0.56em;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(16px, 1.7vw, 26px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.attrezzo--grande { font-size: clamp(22px, 2.5vw, 38px); }
+.at-nero  { background: var(--nero);  color: var(--lime); }
+.at-lime  { background: var(--lime);  color: var(--nero); }
+.at-rosa  { background: var(--rosa);  color: var(--nero); }
+.at-blu   { background: var(--blu);   color: var(--lime); }
+.at-verde { background: var(--verde); color: var(--nero); }
+.cassetta__box.is-fisica {
+  display: block;
+  position: relative;
+  height: clamp(340px, 30vw, 440px);
+  overflow: clip;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--nero) 6%, var(--crema));
+}
+.cassetta__box.is-fisica .attrezzo {
   position: absolute;
-  font-size: 14vw;
-  line-height: 0.9;
-  z-index: 1;
+  left: 0;
+  top: 0;
+  visibility: hidden;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
 }
-.schermo.is-scroll .schermo__telone {
-  position: absolute; inset: 0; margin: 0;
-  width: 100%; height: 100%; min-height: 0;
-  background: transparent;
-  border: 0; border-radius: 0; box-shadow: none;
-  overflow: visible;
-  z-index: 2;
-}
-.schermo.is-scroll .foglio {
-  opacity: 0;
-  left: var(--sx, var(--x)); top: var(--sy, var(--y));
-}
+.cassetta__box.is-fisica .attrezzo.is-presa { z-index: 5; cursor: grabbing; }
 
 @media (max-width: 900px) {
-  .schermo__parola { font-size: clamp(56px, 18vw, 130px); }
-  .schermo__telone { min-height: 0; }
-  .schermo__fogli { position: static; display: flex; flex-direction: column; gap: 16px; padding: clamp(18px, 5vw, 26px); }
-  .foglio { position: static; width: auto; rotate: 0deg; }
-  .foglio--finale { translate: 0 0; }
+  .passi { --top0: 72px; --scalino: 10px; }
+  .passo { height: auto; min-height: 500px; grid-template-columns: 1fr; grid-template-rows: auto 1fr; gap: 12px; margin-bottom: 6vh; }
+  .passo__scena { order: -1; height: clamp(170px, 46vw, 240px); }
+  .passo__nome { font-size: clamp(40px, 12.5vw, 88px); }
+  .passo__desc { padding-top: 12px; }
+  .passi__coda { height: 22vh; }
+  .cassetta__box.is-fisica { height: 400px; }
 }
-
-/* ---------- METODO ---------- */
-.metodo { padding: clamp(30px, 4vw, 60px) 0; }
-.metodo-card { padding: clamp(36px, 5vw, 70px) clamp(20px, 4vw, 64px); }
-.metodo-eyebrow {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 900;
-  font-size: clamp(24px, 2.4vw, 36px);
-  color: var(--nero);
-}
-.metodo-block { margin-top: clamp(30px, 4vw, 56px); }
-.metodo-title {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: clamp(26px, 3vw, 44px);
-  letter-spacing: -0.04em;
-  padding-bottom: 18px;
-}
-.metodo-row {
-  display: grid;
-  grid-template-columns: minmax(150px, 240px) 1fr;
-  gap: 20px;
-  align-items: start;
-  padding: 22px 0;
-  border-top: 1px solid rgba(20, 20, 20, 0.25);
-}
-.metodo-label {
-  font-size: clamp(15px, 1.3vw, 19px);
-  letter-spacing: -0.03em;
-  font-weight: 500;
-}
-.metodo-desc {
-  font-size: clamp(15px, 1.3vw, 19px);
-  letter-spacing: -0.03em;
-  line-height: 1.45;
-  max-width: 640px;
-}
-.tool-list { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: baseline; }
-.tool {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 900;
-  font-size: clamp(18px, 1.8vw, 28px);
-  letter-spacing: -0.02em;
-  color: var(--nero);
-  transition: color 160ms ease, transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-.tool:nth-child(even) { font-family: var(--font-body); font-style: normal; font-weight: 300; letter-spacing: 0.02em; }
-.tool:hover { color: var(--rosa); transform: rotate(-2deg); }
 
 /* ---------- CONTATTI ---------- */
 .contatti { padding: clamp(20px, 3vw, 40px) 0 0; }
@@ -896,7 +939,6 @@ html.has-glove, html.has-glove * { cursor: none !important; }
   .stickerpile { height: clamp(320px, 80vw, 460px); }
   .stk-quote { left: 30%; }
   .stk-burst { right: 8%; }
-  .metodo-row { grid-template-columns: 1fr; gap: 8px; }
   .footer { flex-direction: column; text-align: center; }
 }
 

@@ -348,64 +348,169 @@
       </div>
     </section>
 
-    <!-- METODO -->
+    <!-- METODO: quattro carte che si impilano, poi la cassetta degli attrezzi -->
     <section class="metodo" id="metodo">
-      <!-- SCHERMO: le quattro mosse compaiono come fogli scrollando (alla semente) -->
-      <div class="schermo" id="schermo">
-        <div class="schermo__pin">
-          <h2 class="schermo__parola">IL METODO</h2>
-          <div class="schermo__telone" id="schermoTelone">
-            <div class="schermo__fogli">
-              <article class="foglio foglio-lime" style="--x:5%; --y:26%; --sx:7%; --sy:17%; --rot:-6deg;">
-                <span class="foglio__nome">Si parla</span>
-                <p class="foglio__desc">Ci sentiamo, guardo la tua attività e capiamo insieme dove vuoi arrivare.</p>
-              </article>
-              <article class="foglio foglio-rosa" style="--x:56%; --y:19%; --sx:64%; --sy:16%; --rot:5deg;">
-                <span class="foglio__nome">Si disegna</span>
-                <p class="foglio__desc">Struttura, testi e stile, cuciti su misura sulla tua attività.</p>
-              </article>
-              <article class="foglio foglio-blu" style="--x:8%; --y:60%; --sx:11%; --sy:60%; --rot:4deg;">
-                <span class="foglio__nome">Si costruisce</span>
-                <p class="foglio__desc">Il sito prende forma a mano, animazioni comprese, e te lo mostro mentre cresce.</p>
-              </article>
-              <article class="foglio foglio-verde" style="--x:57%; --y:55%; --sx:61%; --sy:61%; --rot:-5deg;">
-                <span class="foglio__nome">Si va online</span>
-                <p class="foglio__desc">Dominio, messa a punto e piccole correzioni comprese. E poi si festeggia.</p>
-              </article>
-              <article class="foglio foglio--finale" style="--x:50%; --y:50%; --sx:50%; --sy:50%; --rot:-3deg;">
-                <span class="foglio__nome">Mossa segreta</span>
-                <p class="foglio__desc">Non esiste: le mosse sono quattro. Ma un foglio qui in mezzo ci stava troppo bene.</p>
-              </article>
-            </div>
+      <div class="metodo-head">
+        <h2 class="sec-title">Il metodo</h2>
+        <span class="sticker sticker-metodo" aria-hidden="true"><span>come<br>si fa</span></span>
+      </div>
+
+      <div class="passi">
+        <span class="passo__ancora" aria-hidden="true"></span>
+        <article class="passo passo--lime" style="--i:0">
+          <div class="passo__testo">
+            <h3 class="passo__nome">Si<br>parla</h3>
+            <p class="passo__desc">Ci sentiamo, guardo la tua attività e capiamo insieme dove vuoi arrivare.</p>
+            <ul class="passo__cosa" aria-label="cosa ne esce"><li>una chiacchierata</li><li>gli obiettivi chiari</li><li>un preventivo scritto</li></ul>
           </div>
+          <div class="passo__scena">
+          <svg class="scena" data-scena="parla" viewBox="0 0 400 320" aria-hidden="true">
+            <g class="sc-linee" fill="none" stroke="#141414" stroke-width="8" stroke-linecap="round">
+              <path d="M312 36 L332 16"/><path d="M322 62 L350 54"/><path d="M290 24 L296 3"/>
+              <path d="M96 252 L72 264"/><path d="M104 278 L86 298"/>
+            </g>
+            <g class="fumetto fumetto--a">
+              <path d="M74 40 H266 A34 34 0 0 1 300 74 V106 A34 34 0 0 1 266 140 H130 L72 178 L92 140 H74 A34 34 0 0 1 40 106 V74 A34 34 0 0 1 74 40 Z" fill="#F7F6EB" stroke="#141414" stroke-width="7" stroke-linejoin="round"/>
+              <text x="170" y="101" text-anchor="middle" class="fumetto__txt">ho un’idea</text>
+            </g>
+            <g class="fumetto fumetto--b">
+              <path d="M144 170 H336 A34 34 0 0 1 370 204 V236 A34 34 0 0 1 336 270 H328 L350 306 L290 270 H144 A34 34 0 0 1 110 236 V204 A34 34 0 0 1 144 170 Z" fill="#FF3EBA" stroke="#141414" stroke-width="7" stroke-linejoin="round"/>
+              <text x="240" y="231" text-anchor="middle" class="fumetto__txt fumetto__txt--b">parliamone!</text>
+            </g>
+          </svg>
+          </div>
+          <div class="passo__velo" aria-hidden="true"></div>
+        </article>
+        <span class="passo__ancora" aria-hidden="true"></span>
+        <article class="passo passo--rosa" style="--i:1">
+          <div class="passo__testo">
+            <h3 class="passo__nome">Si<br>disegna</h3>
+            <p class="passo__desc">Struttura, testi e stile, cuciti su misura sulla tua attività.</p>
+            <ul class="passo__cosa" aria-label="cosa ne esce"><li>la struttura</li><li>i testi</li><li>lo stile su misura</li></ul>
+          </div>
+          <div class="passo__scena">
+          <svg class="scena" data-scena="disegna" viewBox="0 0 400 320" aria-hidden="true">
+            <path class="disegno disegno--pieno" d="M52 26 H322 A18 18 0 0 1 340 44 V248 A18 18 0 0 1 322 266 H52 A18 18 0 0 1 34 248 V44 A18 18 0 0 1 52 26 Z" fill="#F7F6EB" stroke="#141414" stroke-width="7" stroke-linejoin="round" data-giro="340,26;340,266;34,266;34,26;52,26" data-durata="1.0"/>
+            <path class="disegno" d="M34 66 H340" fill="none" stroke="#141414" stroke-width="6" stroke-linejoin="round" data-giro="34,66;340,66" data-durata="0.36"/>
+            <path class="disegno" d="M66 38 H200 A8 8 0 0 1 208 46 V46 A8 8 0 0 1 200 54 H66 A8 8 0 0 1 58 46 V46 A8 8 0 0 1 66 38 Z" fill="none" stroke="#141414" stroke-width="5" stroke-linejoin="round" data-giro="66,38;208,38;208,54;58,54;66,38" data-durata="0.4"/>
+            <path class="disegno disegno--pieno" d="M66 86 H232 A8 8 0 0 1 240 94 V108 A8 8 0 0 1 232 116 H66 A8 8 0 0 1 58 108 V94 A8 8 0 0 1 66 86 Z" fill="#141414" stroke="#141414" stroke-width="5" stroke-linejoin="round" data-giro="66,86;240,86;240,116;58,116" data-durata="0.36"/>
+            <path class="disegno" d="M68 134 H166 A10 10 0 0 1 176 144 V228 A10 10 0 0 1 166 238 H68 A10 10 0 0 1 58 228 V144 A10 10 0 0 1 68 134 Z" fill="none" stroke="#141414" stroke-width="6" stroke-linejoin="round" data-giro="68,134;176,134;176,238;58,238;58,134" data-durata="0.4"/>
+            <path class="disegno" d="M68 144 L166 228 M166 144 L68 228" fill="none" stroke="#141414" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" data-giro="68,144;166,228;166,144;68,228" data-durata="0.36"/>
+            <path class="disegno" d="M198 146 H316 M198 170 H298 M198 194 H308" fill="none" stroke="#141414" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" data-giro="198,146;316,146;198,170;298,170;198,194;308,194" data-durata="0.5"/>
+            <path class="disegno disegno--pieno" d="M212 212 H278 A14 14 0 0 1 292 226 V226 A14 14 0 0 1 278 240 H212 A14 14 0 0 1 198 226 V226 A14 14 0 0 1 212 212 Z" fill="#CEFF00" stroke="#141414" stroke-width="5" stroke-linejoin="round" data-giro="212,212;292,212;292,240;198,240" data-durata="0.36"/>
+            <g class="matita" transform="translate(318 262)">
+              <g transform="rotate(-40)">
+                <path d="M26 -11 H112 V11 H26 Z" fill="#CEFF00" stroke="#141414" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M112 -11 H126 A6 6 0 0 1 132 -5 V5 A6 6 0 0 1 126 11 H112 Z" fill="#4A60FF" stroke="#141414" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M26 -11 L0 0 L26 11 Z" fill="#F7F6EB" stroke="#141414" stroke-width="5" stroke-linejoin="round"/>
+                <path d="M9 -4 L0 0 L9 4 Z" fill="#141414"/>
+              </g>
+            </g>
+          </svg>
+          </div>
+          <div class="passo__velo" aria-hidden="true"></div>
+        </article>
+        <span class="passo__ancora" aria-hidden="true"></span>
+        <article class="passo passo--blu" style="--i:2">
+          <div class="passo__testo">
+            <h3 class="passo__nome">Si<br>costruisce</h3>
+            <p class="passo__desc">Il sito prende forma a mano, animazioni comprese, e te lo mostro mentre cresce.</p>
+            <ul class="passo__cosa" aria-label="cosa ne esce"><li>codice a mano</li><li>le animazioni</li><li>anteprime mentre cresce</li></ul>
+          </div>
+          <div class="passo__scena">
+          <svg class="scena" data-scena="costruisce" viewBox="0 0 400 320" aria-hidden="true">
+            <g class="editor">
+              <path d="M44 30 H342 A18 18 0 0 1 360 48 V256 A18 18 0 0 1 342 274 H44 A18 18 0 0 1 26 256 V48 A18 18 0 0 1 44 30 Z" fill="#141414" stroke="#141414" stroke-width="7"/>
+              <path d="M26 70 H360" stroke="#F7F6EB" stroke-opacity=".22" stroke-width="3"/>
+              <path d="M54 42 H146 A10 10 0 0 1 156 52 V52 A10 10 0 0 1 146 62 H54 A10 10 0 0 1 44 52 V52 A10 10 0 0 1 54 42 Z" fill="#F7F6EB"/>
+              <text x="100" y="56.5" text-anchor="middle" class="editor__tab">index.html</text>
+            </g>
+            <g class="righe">
+              <rect class="riga" x="50" y="90" width="84" height="12" rx="6" fill="#CEFF00"/>
+              <rect class="riga" x="142" y="90" width="58" height="12" rx="6" fill="#FF3EBA"/>
+              <rect class="riga" x="72" y="112" width="120" height="12" rx="6" fill="#0099FF"/>
+              <rect class="riga" x="94" y="134" width="70" height="12" rx="6" fill="#F7F6EB"/>
+              <rect class="riga" x="172" y="134" width="88" height="12" rx="6" fill="#CEFF00"/>
+              <rect class="riga" x="94" y="156" width="140" height="12" rx="6" fill="#FF3EBA"/>
+              <rect class="riga" x="72" y="178" width="56" height="12" rx="6" fill="#31A362"/>
+              <rect class="riga" x="136" y="178" width="92" height="12" rx="6" fill="#F7F6EB"/>
+              <rect class="riga" x="94" y="200" width="110" height="12" rx="6" fill="#CEFF00"/>
+              <rect class="riga" x="72" y="222" width="70" height="12" rx="6" fill="#0099FF"/>
+              <rect class="riga" x="50" y="244" width="48" height="12" rx="6" fill="#FF3EBA"/>
+            </g>
+            <rect class="caret" x="106" y="241" width="5" height="18" rx="2" fill="#CEFF00"/>
+            <g class="adesivo-codice">
+              <path d="M298 26 H372 A16 16 0 0 1 388 42 V74 A16 16 0 0 1 372 90 H298 A16 16 0 0 1 282 74 V42 A16 16 0 0 1 298 26 Z" fill="#F7F6EB" stroke="#141414" stroke-width="7"/>
+              <text x="335" y="71" text-anchor="middle" class="adesivo-codice__txt">&lt;/&gt;</text>
+            </g>
+          </svg>
+          </div>
+          <div class="passo__velo" aria-hidden="true"></div>
+        </article>
+        <span class="passo__ancora" aria-hidden="true"></span>
+        <article class="passo passo--verde" style="--i:3">
+          <div class="passo__testo">
+            <h3 class="passo__nome">Si va<br>online</h3>
+            <p class="passo__desc">Dominio, messa a punto e piccole correzioni comprese. E poi si festeggia.</p>
+            <ul class="passo__cosa" aria-label="cosa ne esce"><li>il dominio</li><li>la messa a punto</li><li>le piccole correzioni</li></ul>
+          </div>
+          <div class="passo__scena">
+          <svg class="scena" data-scena="online" viewBox="0 0 400 320" aria-hidden="true">
+            <g class="raggi" fill="none" stroke-width="10" stroke-linecap="round">
+              <path class="raggio" d="M251.3 28.2 L261.2 4.2" stroke="#F7F6EB"/>
+              <path class="raggio" d="M323.8 100.7 L347.8 90.8" stroke="#CEFF00"/>
+              <path class="raggio" d="M323.8 203.3 L347.8 213.2" stroke="#F7F6EB"/>
+              <path class="raggio" d="M251.3 275.8 L261.2 299.8" stroke="#CEFF00"/>
+              <path class="raggio" d="M148.7 275.8 L138.8 299.8" stroke="#F7F6EB"/>
+              <path class="raggio" d="M76.2 203.3 L52.2 213.2" stroke="#CEFF00"/>
+              <path class="raggio" d="M76.2 100.7 L52.2 90.8" stroke="#F7F6EB"/>
+              <path class="raggio" d="M148.7 28.2 L138.8 4.2" stroke="#CEFF00"/>
+            </g>
+            <g class="stella">
+              <polygon points="200.0,34.0 219.9,104.0 283.4,68.6 248.0,132.1 318.0,152.0 248.0,171.9 283.4,235.4 219.9,200.0 200.0,270.0 180.1,200.0 116.6,235.4 152.0,171.9 82.0,152.0 152.0,132.1 116.6,68.6 180.1,104.0" fill="#4A60FF"/>
+              <polygon points="200.0,52.3 216.8,111.4 270.5,81.5 240.6,135.2 299.7,152.0 240.6,168.8 270.5,222.5 216.8,192.6 200.0,251.7 183.2,192.6 129.5,222.5 159.4,168.8 100.3,152.0 159.4,135.2 129.5,81.5 183.2,111.4" fill="#FF3EBA"/>
+              <polygon points="200.0,70.6 213.7,118.9 257.6,94.4 233.1,138.3 281.4,152.0 233.1,165.7 257.6,209.6 213.7,185.1 200.0,233.4 186.3,185.1 142.4,209.6 166.9,165.7 118.6,152.0 166.9,138.3 142.4,94.4 186.3,118.9" fill="#CEFF00"/>
+              <polygon points="200.0,88.9 210.6,126.3 244.6,107.4 225.7,141.4 263.1,152.0 225.7,162.6 244.6,196.6 210.6,177.7 200.0,215.1 189.4,177.7 155.4,196.6 174.3,162.6 136.9,152.0 174.3,141.4 155.4,107.4 189.4,126.3" fill="#F7F6EB"/>
+              <polygon points="200.0,107.2 207.6,133.7 231.7,120.3 218.3,144.4 244.8,152.0 218.3,159.6 231.7,183.7 207.6,170.3 200.0,196.8 192.4,170.3 168.3,183.7 181.7,159.6 155.2,152.0 181.7,144.4 168.3,120.3 192.4,133.7" fill="#141414"/>
+              <polygon points="200.0,134.0 203.1,144.6 212.7,139.3 207.4,148.9 218.0,152.0 207.4,155.1 212.7,164.7 203.1,159.4 200.0,170.0 196.9,159.4 187.3,164.7 192.6,155.1 182.0,152.0 192.6,148.9 187.3,139.3 196.9,144.6" fill="#F7F6EB"/>
+            </g>
+            <g class="nastro">
+              <path d="M94 123 H306 A12 12 0 0 1 318 135 V169 A12 12 0 0 1 306 181 H94 A12 12 0 0 1 82 169 V135 A12 12 0 0 1 94 123 Z" fill="#F7F6EB" stroke="#141414" stroke-width="7"/>
+              <text x="200" y="166" text-anchor="middle" class="nastro__txt">ONLINE!</text>
+            </g>
+          </svg>
+          </div>
+          <div class="passo__velo" aria-hidden="true"></div>
+        </article>
+        <div class="passi__coda">
+          <p class="mossa-segreta"><b>Mossa segreta</b> Non esiste: le mosse sono quattro. Ma uno sticker in più ci stava troppo bene.</p>
         </div>
       </div>
 
-      <!-- cassetta degli attrezzi -->
-      <div class="card card-crema metodo-card">
-        <div class="metodo-block">
-          <h3 class="metodo-title">La cassetta degli attrezzi</h3>
-          <div class="metodo-row">
-            <span class="metodo-label">Linguaggi</span>
-            <div class="tool-list"><span class="tool">HTML</span><span class="tool">CSS</span><span class="tool">JAVASCRIPT</span><span class="tool">TYPESCRIPT</span></div>
-          </div>
-          <div class="metodo-row">
-            <span class="metodo-label">Animazione</span>
-            <div class="tool-list"><span class="tool">GSAP</span><span class="tool">SCROLLTRIGGER</span><span class="tool">LENIS</span><span class="tool">THREE.JS</span></div>
-          </div>
-          <div class="metodo-row">
-            <span class="metodo-label">Framework</span>
-            <div class="tool-list"><span class="tool">NEXT.JS</span><span class="tool">REACT</span><span class="tool">TAILWIND</span></div>
-          </div>
-          <div class="metodo-row">
-            <span class="metodo-label">Backend</span>
-            <div class="tool-list"><span class="tool">SUPABASE</span><span class="tool">NODE</span><span class="tool">VERCEL</span></div>
-          </div>
-          <div class="metodo-row">
-            <span class="metodo-label">Strumenti</span>
-            <div class="tool-list"><span class="tool">FIGMA</span><span class="tool">BLENDER</span><span class="tool">GIT</span></div>
-          </div>
+      <div class="card card-crema cassetta">
+        <div class="cassetta__testa">
+          <h3 class="cassetta__titolo">La cassetta degli attrezzi</h3>
+          <p class="cassetta__nota">Quello che uso ogni giorno per costruire i siti.<span class="cassetta__invito"> Prendili pure: si possono lanciare.</span></p>
         </div>
+        <ul class="cassetta__box" id="cassetta" aria-label="strumenti">
+          <li class="attrezzo at-nero attrezzo--grande">GSAP</li>
+          <li class="attrezzo at-lime">ScrollTrigger</li>
+          <li class="attrezzo at-rosa">Lenis</li>
+          <li class="attrezzo at-blu attrezzo--grande">Three.js</li>
+          <li class="attrezzo at-verde attrezzo--grande">JavaScript</li>
+          <li class="attrezzo at-nero">TypeScript</li>
+          <li class="attrezzo at-lime">HTML</li>
+          <li class="attrezzo at-rosa">CSS</li>
+          <li class="attrezzo at-blu">React</li>
+          <li class="attrezzo at-verde">Next.js</li>
+          <li class="attrezzo at-nero">Tailwind</li>
+          <li class="attrezzo at-lime">Supabase</li>
+          <li class="attrezzo at-rosa">Node</li>
+          <li class="attrezzo at-blu">Vercel</li>
+          <li class="attrezzo at-verde attrezzo--grande">Figma</li>
+          <li class="attrezzo at-nero attrezzo--grande">Blender</li>
+          <li class="attrezzo at-lime">Git</li>
+        </ul>
       </div>
     </section>
 
@@ -456,6 +561,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/Draggable.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/InertiaPlugin.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/matter-js@0.20.0/build/matter.min.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

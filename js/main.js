@@ -63,7 +63,7 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
   const TIP_X = 0.33 * SIZE;
   const TIP_Y = 0.24 * SIZE;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const hot = 'a, button, .pill, .stk, .roster-row, .hero-badge, input, textarea';
+  const hot = 'a, button, .pill, .stk, .roster-row, .hero-badge, .attrezzo, input, textarea';
   gsap.set(g, { transformOrigin: '33% 24%' });
   const xTo = gsap.quickTo(g, 'x', { duration: reduce ? 0 : 0.11, ease: 'power3' });
   const yTo = gsap.quickTo(g, 'y', { duration: reduce ? 0 : 0.11, ease: 'power3' });
@@ -392,8 +392,8 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
   });
 
   /* ---------- sticker delle sezioni ---------- */
-  document.querySelectorAll('.sticker-progetti, .sticker-servizi').forEach((s) => {
-    const finalRot = s.classList.contains('sticker-progetti') ? 12 : -10;
+  document.querySelectorAll('.sticker-progetti, .sticker-servizi, .sticker-metodo').forEach((s) => {
+    const finalRot = s.classList.contains('sticker-progetti') ? 12 : s.classList.contains('sticker-metodo') ? 8 : -10;
     gsap.fromTo(
       s,
       { scale: 0, rotation: finalRot - 40 },
@@ -509,17 +509,6 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
         scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: true },
       }
     );
-  });
-
-  /* ---------- metodo: righe che si aprono ---------- */
-  document.querySelectorAll('.metodo-row').forEach((rowEl) => {
-    gsap.from(rowEl, {
-      autoAlpha: 0,
-      y: 26,
-      duration: 0.7,
-      ease: 'power2.out',
-      scrollTrigger: { trigger: rowEl, start: 'top 90%' },
-    });
   });
 
   /* ---------- contatti: macchina da scrivere in ciclo ---------- */
@@ -645,40 +634,285 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
 });
 
 /* ============================================================
-   SCHERMO: le quattro mosse compaiono come fogli (solo desktop)
+   METODO: le quattro carte si impilano, ogni scena si disegna
+   quando la sua carta arriva, gli attrezzi cadono con la fisica
    ============================================================ */
-mm.add('(min-width: 901px) and (prefers-reduced-motion: no-preference)', () => {
-  const schermo = document.getElementById('schermo');
-  if (!schermo) return;
-  schermo.classList.add('is-scroll');
-  const tutti = gsap.utils.toArray('.foglio');
-  /* in modalità scroll la rotazione la gestisce GSAP (transform), non il CSS */
-  tutti.forEach((f) => (f.style.rotate = '0deg'));
-  const finale = tutti.find((f) => f.classList.contains('foglio--finale'));
-  const fogli = tutti.filter((f) => f !== finale);
-  const rotOf = (el) => parseFloat(getComputedStyle(el).getPropertyValue('--rot')) || 0;
-
-  const tl = gsap.timeline({
-    scrollTrigger: { trigger: '.schermo', start: 'top top', end: 'bottom bottom', scrub: 0.5, invalidateOnRefresh: true },
+function nascondiTratti(els) {
+  els.forEach((el) => {
+    const L = el.getTotalLength() + 2;
+    el.style.strokeDasharray = `${L}`;
+    el.style.strokeDashoffset = `${L}`;
   });
-  tl.fromTo(fogli,
-      { autoAlpha: 0, scale: 0.5, y: 70, rotation: (i) => (i % 2 ? 16 : -16) },
-      {
-        autoAlpha: 1, scale: 1, y: 0,
-        rotation: (i) => rotOf(fogli[i]),
-        stagger: 0.14, duration: 0.18, ease: 'back.out(1.6)',
-      }, 0.08);
-  if (finale) {
-    tl.fromTo(finale,
-      { autoAlpha: 0, scale: 0.3, y: 40, rotation: -28 },
-      { autoAlpha: 1, scale: 1, y: 0, rotation: rotOf(finale), duration: 0.24, ease: 'back.out(2.2)' },
-      '+=0.08');
-  }
-  tl.to({}, { duration: 0.3 });
+}
+
+function scenaParla(svg, idle) {
+  const a = svg.querySelector('.fumetto--a');
+  const b = svg.querySelector('.fumetto--b');
+  const linee = [...svg.querySelectorAll('.sc-linee path')];
+  nascondiTratti(linee);
+  gsap.set(a, { scale: 0.3, autoAlpha: 0, svgOrigin: '72 178' });
+  gsap.set(b, { scale: 0.3, autoAlpha: 0, svgOrigin: '350 306' });
+  return gsap.timeline({ paused: true })
+    .to(a, { scale: 1, autoAlpha: 1, duration: 0.55, ease: 'back.out(2.4)' })
+    .to(b, { scale: 1, autoAlpha: 1, duration: 0.55, ease: 'back.out(2.4)' }, '+=0.3')
+    .to(linee, { strokeDashoffset: 0, duration: 0.28, ease: 'power2.out', stagger: 0.07 }, '-=0.15')
+    .add(() => {
+      idle.push(gsap.to(a, { y: -7, duration: 1.7, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+      idle.push(gsap.to(b, { y: 7, duration: 2.1, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    });
+}
+
+function scenaDisegna(svg, idle) {
+  const pezzi = [...svg.querySelectorAll('.disegno')];
+  const pieni = svg.querySelectorAll('.disegno--pieno');
+  const matita = svg.querySelector('.matita');
+  nascondiTratti(pezzi);
+  gsap.set(pieni, { fillOpacity: 0 });
+  gsap.set(matita, { x: 300, y: 262, autoAlpha: 0 });
+  const tl = gsap.timeline({ paused: true });
+  tl.to(matita, { x: 52, y: 26, autoAlpha: 1, duration: 0.45, ease: 'power2.out' });
+  pezzi.forEach((p) => {
+    const d = parseFloat(p.dataset.durata) || 0.36;
+    const giro = p.dataset.giro.split(';').map((c) => c.split(',').map(Number));
+    tl.to(p, { strokeDashoffset: 0, duration: d, ease: 'none' });
+    const mano = gsap.timeline();
+    giro.forEach(([x, y]) => mano.to(matita, { x, y, duration: d / giro.length, ease: 'none' }));
+    tl.add(mano, '<');
+  });
+  tl.to(pieni, { fillOpacity: 1, duration: 0.4, stagger: 0.08 }, '-=0.1')
+    .to(matita, { x: 300, y: 262, duration: 0.55, ease: 'back.out(1.8)' }, '<')
+    .add(() => idle.push(gsap.to(matita, { y: 252, duration: 1.3, ease: 'sine.inOut', yoyo: true, repeat: -1 })));
+  return tl;
+}
+
+function scenaCostruisce(svg, idle) {
+  const editor = svg.querySelector('.editor');
+  const righe = svg.querySelectorAll('.riga');
+  const caret = svg.querySelector('.caret');
+  const adesivo = svg.querySelector('.adesivo-codice');
+  gsap.set(editor, { scale: 0.86, autoAlpha: 0, transformOrigin: '50% 50%' });
+  gsap.set(righe, { scaleX: 0, transformOrigin: '0% 50%' });
+  gsap.set(caret, { autoAlpha: 0 });
+  gsap.set(adesivo, { scale: 1.7, autoAlpha: 0, rotation: -28, transformOrigin: '50% 50%' });
+  return gsap.timeline({ paused: true })
+    .to(editor, { scale: 1, autoAlpha: 1, duration: 0.5, ease: 'back.out(1.8)' })
+    .to(righe, { scaleX: 1, duration: 0.26, ease: 'power2.out', stagger: 0.09 }, '+=0.1')
+    .set(caret, { autoAlpha: 1 })
+    .to(adesivo, { scale: 1, autoAlpha: 1, rotation: 10, duration: 0.55, ease: 'back.out(2.2)' }, '-=0.05')
+    .add(() => {
+      idle.push(gsap.to(caret, { opacity: 0, duration: 0.5, ease: 'steps(1)', repeat: -1, yoyo: true }));
+      idle.push(gsap.to(adesivo, { rotation: 4, duration: 1.6, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
+    });
+}
+
+function scenaOnline(svg, idle) {
+  const stella = svg.querySelector('.stella');
+  const strati = svg.querySelectorAll('.stella polygon');
+  const raggi = [...svg.querySelectorAll('.raggio')];
+  const nastro = svg.querySelector('.nastro');
+  nascondiTratti(raggi);
+  gsap.set(strati, { scale: 0.2, autoAlpha: 0, svgOrigin: '200 152' });
+  gsap.set(nastro, { scale: 1.8, autoAlpha: 0, rotation: -26, transformOrigin: '50% 50%' });
+  return gsap.timeline({ paused: true })
+    .to(strati, { scale: 1, autoAlpha: 1, duration: 0.6, ease: 'back.out(1.7)', stagger: 0.07 })
+    .to(raggi, { strokeDashoffset: 0, duration: 0.35, ease: 'expo.out', stagger: 0.03 }, '-=0.25')
+    .to(nastro, { scale: 1, autoAlpha: 1, rotation: -8, duration: 0.5, ease: 'back.out(2.2)' }, '-=0.2')
+    .add(() => idle.push(gsap.to(stella, { rotation: '+=360', svgOrigin: '200 152', duration: 28, ease: 'none', repeat: -1 })));
+}
+
+function cassettaFisica() {
+  const box = document.getElementById('cassetta');
+  if (!box || !window.Matter) return () => {};
+  const { Engine, Bodies, Body, Composite, Constraint, Vector } = Matter;
+  box.classList.add('is-fisica');
+  box.closest('.cassetta')?.classList.add('is-viva');
+  const engine = Engine.create();
+  engine.gravity.y = 1.05;
+  const SP = 200;
+  let W = box.clientWidth;
+  let H = box.clientHeight;
+  let muri = [];
+  const costruisciMuri = () => {
+    if (muri.length) Composite.remove(engine.world, muri);
+    W = box.clientWidth;
+    H = box.clientHeight;
+    muri = [
+      Bodies.rectangle(W / 2, H + SP / 2, W + SP * 2, SP, { isStatic: true }),
+      Bodies.rectangle(-SP / 2, -H / 2, SP, H * 4, { isStatic: true }),
+      Bodies.rectangle(W + SP / 2, -H / 2, SP, H * 4, { isStatic: true }),
+      Bodies.rectangle(W / 2, -H * 1.5 - SP / 2, W + SP * 2, SP, { isStatic: true }),
+    ];
+    Composite.add(engine.world, muri);
+  };
+  costruisciMuri();
+
+  const pezzi = [...box.querySelectorAll('.attrezzo')].map((el) => {
+    const w = el.offsetWidth;
+    const h = el.offsetHeight;
+    const body = Bodies.rectangle(W / 2, -600, w, h, {
+      chamfer: { radius: h / 2 - 1 }, restitution: 0.28, friction: 0.45, frictionAir: 0.012, density: 0.002,
+    });
+    /* piu' inerzia alla rotazione: si inclinano ma si capovolgono di rado, restano leggibili */
+    Body.setInertia(body, body.inertia * 2.5);
+    return { el, w, h, body, dentro: false };
+  });
+
+  const disegna = () => {
+    for (const p of pezzi) {
+      if (!p.dentro) continue;
+      const { x, y } = p.body.position;
+      p.el.style.transform = `translate3d(${(x - p.w / 2).toFixed(1)}px, ${(y - p.h / 2).toFixed(1)}px, 0) rotate(${p.body.angle.toFixed(3)}rad)`;
+    }
+  };
+  let attiva = false;
+  let viva = true;
+  const passo = (t, dt) => {
+    if (!attiva) return;
+    Engine.update(engine, Math.min(dt, 1000 / 60));
+    disegna();
+  };
+  gsap.ticker.add(passo);
+
+  const lancia = () => {
+    pezzi.forEach((p, i) => gsap.delayedCall(i * 0.09, () => {
+      if (!viva) return;
+      const minX = p.w / 2 + 6;
+      Body.setPosition(p.body, { x: gsap.utils.random(minX, Math.max(minX, W - p.w / 2 - 6)), y: -p.h - gsap.utils.random(10, 240) });
+      Body.setAngle(p.body, gsap.utils.random(-0.3, 0.3));
+      Body.setVelocity(p.body, { x: gsap.utils.random(-1.5, 1.5), y: 2 });
+      Body.setAngularVelocity(p.body, gsap.utils.random(-0.02, 0.02));
+      Composite.add(engine.world, p.body);
+      p.dentro = true;
+      p.el.style.visibility = 'visible';
+    }));
+  };
+  const stVista = ScrollTrigger.create({ trigger: box, start: 'top bottom', end: 'bottom top', onToggle: (s) => { attiva = s.isActive; } });
+  const stVia = ScrollTrigger.create({ trigger: box, start: 'top 72%', once: true, onEnter: lancia });
+
+  /* presa col puntatore (mouse o dito): un vincolo elastico tra il punto e la pillola */
+  const nelBox = (e) => {
+    const r = box.getBoundingClientRect();
+    return { x: e.clientX - r.left, y: e.clientY - r.top };
+  };
+  let presa = null;
+  pezzi.forEach((p) => {
+    p.el.addEventListener('pointerdown', (e) => {
+      if (!viva || !p.dentro || presa) return;
+      e.preventDefault();
+      try { p.el.setPointerCapture(e.pointerId); } catch (_) { /* niente */ }
+      const punto = nelBox(e);
+      const vincolo = Constraint.create({
+        pointA: punto, bodyB: p.body, pointB: Vector.sub(punto, p.body.position), stiffness: 0.2, damping: 0.08, length: 0,
+      });
+      Composite.add(engine.world, vincolo);
+      presa = { p, vincolo, id: e.pointerId };
+      p.el.classList.add('is-presa');
+    });
+    p.el.addEventListener('pointermove', (e) => {
+      if (presa && presa.p === p && presa.id === e.pointerId) presa.vincolo.pointA = nelBox(e);
+    });
+    const lascia = () => {
+      if (!presa || presa.p !== p) return;
+      Composite.remove(engine.world, presa.vincolo);
+      presa = null;
+      p.el.classList.remove('is-presa');
+    };
+    p.el.addEventListener('pointerup', lascia);
+    p.el.addEventListener('pointercancel', lascia);
+    p.el.addEventListener('lostpointercapture', lascia);
+  });
+
+  let attesa;
+  const rimetti = () => {
+    costruisciMuri();
+    pezzi.forEach((p) => {
+      if (!p.dentro) return;
+      const x = gsap.utils.clamp(p.w / 2, Math.max(p.w / 2, W - p.w / 2), p.body.position.x);
+      Body.setPosition(p.body, { x, y: Math.min(p.body.position.y, H - p.h / 2) });
+      Body.setVelocity(p.body, { x: 0, y: 0 });
+    });
+  };
+  const ridimensiona = () => { clearTimeout(attesa); attesa = setTimeout(rimetti, 150); };
+  window.addEventListener('resize', ridimensiona);
 
   return () => {
-    schermo.classList.remove('is-scroll');
-    fogli.forEach((f) => (f.style.rotate = ''));
+    viva = false;
+    gsap.ticker.remove(passo);
+    stVista.kill();
+    stVia.kill();
+    window.removeEventListener('resize', ridimensiona);
+    Composite.clear(engine.world, false);
+    Engine.clear(engine);
+    box.classList.remove('is-fisica');
+    box.closest('.cassetta')?.classList.remove('is-viva');
+    pezzi.forEach((p) => { p.el.style.transform = ''; p.el.style.visibility = ''; });
+  };
+}
+
+/* su telefono la carta occupa tutta la larghezza: lo sticker scherzoso va dopo la pila, non sopra */
+mm.add('(max-width: 900px)', () => {
+  const mossa = document.querySelector('.mossa-segreta');
+  const passi = document.querySelector('.passi');
+  if (!mossa || !passi) return undefined;
+  const casa = mossa.parentElement;
+  passi.after(mossa);
+  return () => casa.append(mossa);
+});
+
+mm.add('(prefers-reduced-motion: no-preference)', () => {
+  const sezione = document.querySelector('.metodo');
+  if (!sezione) return undefined;
+  const passi = gsap.utils.toArray('.passo');
+  const ancore = gsap.utils.toArray('.passo__ancora');
+  const idle = [];
+  const scene = { parla: scenaParla, disegna: scenaDisegna, costruisce: scenaCostruisce, online: scenaOnline };
+  const topDi = (el) => parseFloat(getComputedStyle(el).top) || 0;
+
+  passi.forEach((passo, i) => {
+    const svg = passo.querySelector('.scena');
+    const tl = svg && scene[svg.dataset.scena] ? scene[svg.dataset.scena](svg, idle) : null;
+    ScrollTrigger.create({ trigger: ancore[i], start: 'top 72%', once: true, onEnter: () => tl && tl.play() });
+
+    gsap.from(passo.querySelector('.passo__nome'), {
+      yPercent: 30, autoAlpha: 0, duration: 0.8, ease: 'expo.out',
+      scrollTrigger: { trigger: ancore[i], start: 'top 72%', once: true },
+    });
+    gsap.from(passo.querySelectorAll('.passo__cosa li'), {
+      y: 18, autoAlpha: 0, rotation: gsap.utils.wrap([-6, 5, -3]), duration: 0.5, ease: 'back.out(2)', stagger: 0.07,
+      scrollTrigger: { trigger: ancore[i], start: 'top 55%', once: true },
+    });
+
+    /* quando arriva la carta dopo, questa si fa piccola, si storce appena e va in ombra */
+    const dopo = passi[i + 1];
+    if (!dopo) return;
+    const corsa = () => ({
+      trigger: ancore[i + 1], start: 'top bottom', end: () => `top ${topDi(dopo)}px`, scrub: true, invalidateOnRefresh: true,
+    });
+    gsap.to(passo, { scale: 0.93, rotation: i % 2 ? 1.4 : -1.4, ease: 'none', scrollTrigger: corsa() });
+    gsap.to(passo.querySelector('.passo__velo'), { opacity: 0.38, ease: 'none', scrollTrigger: corsa() });
+  });
+
+  const mossa = sezione.querySelector('.mossa-segreta');
+  if (mossa) {
+    gsap.fromTo(mossa,
+      { scale: 1.8, autoAlpha: 0, rotation: -18 },
+      { scale: 1, autoAlpha: 1, rotation: 4, duration: 0.55, ease: 'back.out(2)',
+        scrollTrigger: { trigger: mossa, start: 'top 92%', toggleActions: 'play none none reverse' } });
+  }
+
+  /* le animazioni di contorno girano solo quando la sezione e' a schermo */
+  ScrollTrigger.create({
+    trigger: sezione, start: 'top bottom', end: 'bottom top',
+    onToggle: (s) => idle.forEach((t) => (s.isActive ? t.resume() : t.pause())),
+  });
+
+  let smontaCassetta = () => {};
+  let smontata = false;
+  document.fonts.ready.then(() => { if (!smontata) smontaCassetta = cassettaFisica(); });
+  return () => {
+    smontata = true;
+    smontaCassetta();
+    idle.forEach((t) => t.kill());
   };
 });
 
