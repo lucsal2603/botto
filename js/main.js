@@ -59,7 +59,7 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
   if (!isFinePointer) return;
   const g = document.getElementById('guanto');
   if (!g) return;
-  const SIZE = 60;
+  const SIZE = 52;
   const TIP_X = 0.33 * SIZE;
   const TIP_Y = 0.24 * SIZE;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -108,8 +108,7 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
 
   /* click: il dito affonda come un pulsante, poi torna su elastico e lascia una botta colorata */
   const mano = g.querySelector('.g-mano');
-  const indice = g.querySelector('.g-indice');
-  const polsino = g.querySelector('.g-polsino');
+  const indice = g.querySelectorAll('.g-indice');
   const COLORI = ['#4A60FF', '#FF3EBA', '#31A362', '#CEFF00'];
   let giro = 0;
 
@@ -166,21 +165,19 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
   window.addEventListener('pointerdown', (e) => {
     if (reduce || (e.pointerType && e.pointerType !== 'mouse')) return;
     premuto = true;
-    gsap.killTweensOf([mano, indice, polsino]);
+    gsap.killTweensOf([mano, ...indice]);
     gsap.timeline()
-      .to(mano, { y: -4, rotation: -4, transformOrigin: '50% 90%', duration: 0.09, ease: 'power3.out' }, 0)
-      .to(indice, { scaleY: 0.8, transformOrigin: '50% 100%', duration: 0.09, ease: 'power3.out' }, 0)
-      .to(polsino, { y: 2, duration: 0.12, ease: 'power2.out' }, 0);
+      .to(mano, { x: -3, y: -3, rotation: -4, svgOrigin: '66 80', duration: 0.09, ease: 'power3.out' }, 0)
+      .to(indice, { scale: 0.8, svgOrigin: '62 53', duration: 0.09, ease: 'power3.out' }, 0);
     botta(e.clientX, e.clientY);
   });
   window.addEventListener('pointerup', (e) => {
     if (!premuto) return;
     premuto = false;
     gsap.timeline()
-      .to(mano, { y: 0, rotation: 0, transformOrigin: '50% 90%', duration: 0.6, ease: 'elastic.out(1.1, 0.4)' }, 0)
-      .to(indice, { scaleY: 1, transformOrigin: '50% 100%', duration: 0.55, ease: 'elastic.out(1.3, 0.35)' }, 0)
-      .fromTo(indice, { rotation: 0 }, { keyframes: { rotation: [10, -8, 5, -2, 0] }, transformOrigin: '50% 100%', duration: 0.5, ease: 'none' }, 0.04)
-      .to(polsino, { y: 0, duration: 0.5, ease: 'elastic.out(1, 0.45)' }, 0.03);
+      .to(mano, { x: 0, y: 0, rotation: 0, svgOrigin: '66 80', duration: 0.6, ease: 'elastic.out(1.1, 0.4)' }, 0)
+      .to(indice, { scale: 1, svgOrigin: '62 53', duration: 0.55, ease: 'elastic.out(1.3, 0.35)' }, 0)
+      .fromTo(indice, { rotation: 0 }, { keyframes: { rotation: [10, -8, 5, -2, 0] }, svgOrigin: '62 53', duration: 0.5, ease: 'none' }, 0.04);
   });
 })();
 

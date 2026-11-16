@@ -87,7 +87,7 @@ ul { list-style: none; }
 .guanto {
   position: fixed;
   top: 0; left: 0;
-  width: 60px; height: 60px;
+  width: 52px; height: 52px;
   z-index: 300;
   pointer-events: none;
   opacity: 0;
