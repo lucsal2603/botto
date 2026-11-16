@@ -87,15 +87,35 @@
   <!-- CURSORE: guanto che punta (segue il mouse via JS, punta del dito = hotspot) -->
   <div class="guanto" id="guanto" aria-hidden="true">
     <svg viewBox="0 0 100 100">
-      <g fill="#111" stroke="#111" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
-        <path d="M 58,50 C 64,43 77,41 83,52 C 91,64 90,79 81,87 C 77,91 74,95 66,96 C 56,98 44,93 40,85 C 30,81 25,72 30,66 C 24,60 27,53 34,52 C 30,46 36,41 44,46 Z"/>
-        <line x1="33" y1="24" x2="62" y2="53" stroke-width="29"/>
+      <g transform="translate(33 24) rotate(-28) translate(-46 -4)" stroke="#111" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+        <g class="g-polsino">
+          <rect x="27" y="80" width="42" height="17" rx="6" fill="#4A60FF"/>
+          <path d="M 31,86.5 H 65" fill="none" stroke="#CEFF00" stroke-width="2.6"/>
+          <path d="M 33,91.5 H 63" fill="none" stroke-width="1.6" stroke-dasharray="2 3"/>
+        </g>
+        <g class="g-mano">
+          <!-- dorso -->
+          <path d="M 39,46 C 33,58 33,72 36,80 C 38,86 60,87 66,80 C 72,72 73,58 70,46 Z" fill="#fff"/>
+          <path d="M 66,78 C 70,70 70,58 68,48" fill="none" stroke="#E4E1D3" stroke-width="4"/>
+          <!-- dita piegate -->
+          <rect x="48" y="62" width="25" height="12" rx="6" fill="#fff"/>
+          <rect x="48" y="52" width="27" height="12" rx="6" fill="#fff"/>
+          <rect x="48" y="42" width="27" height="12" rx="6" fill="#fff"/>
+          <path d="M 66,45.5 C 69,45.5 71,47 71.5,48" fill="none" stroke="#E4E1D3" stroke-width="2.2"/>
+          <path d="M 66,55.5 C 69,55.5 71,57 71.5,58" fill="none" stroke="#E4E1D3" stroke-width="2.2"/>
+          <!-- indice -->
+          <g class="g-indice">
+            <rect x="37" y="4" width="17" height="52" rx="8.5" fill="#fff"/>
+            <path d="M 50.5,12 V 40" fill="none" stroke="#E4E1D3" stroke-width="3"/>
+            <path d="M 41.5,8.5 C 41.5,13 49.5,13 49.5,8.5" fill="none" stroke-width="2"/>
+            <path d="M 41,30 C 44,31.5 47,31.5 50,30" fill="none" stroke-width="2"/>
+            <path d="M 41,34 C 44,35.2 47,35.2 50,34" fill="none" stroke-width="1.6"/>
+          </g>
+          <!-- pollice -->
+          <path d="M 32,58 C 30,52 34,48 40,50 L 60,61 C 65,64 62,71 56,69 L 36,63 C 34,62 32.5,60.5 32,58 Z" fill="#fff"/>
+          <path d="M 52,66 C 55,67 58,67 59.5,65.5" fill="none" stroke="#E4E1D3" stroke-width="2"/>
+        </g>
       </g>
-      <g fill="#fff" stroke="#fff" stroke-linejoin="round" stroke-linecap="round">
-        <path d="M 58,50 C 64,43 77,41 83,52 C 91,64 90,79 81,87 C 77,91 74,95 66,96 C 56,98 44,93 40,85 C 30,81 25,72 30,66 C 24,60 27,53 34,52 C 30,46 36,41 44,46 Z" stroke-width="0"/>
-        <line x1="33" y1="24" x2="62" y2="53" stroke-width="20"/>
-      </g>
-      <path d="M 39,47 C 47,49 56,53 62,60" fill="none" stroke="#111" stroke-width="4.5" stroke-linecap="round"/>
     </svg>
   </div>
 
@@ -230,28 +250,28 @@
               <span class="roster-cap">Inferno editoriale con negozio demo, carrello e cassa finti</span>
             </a>
           </li>
-          <li class="roster-row" data-img="assets/img/granaio.jpg" data-accent="#4A60FF">
-            <a class="roster-link" href="https://lucsal2603.github.io/granaio/" target="_blank" rel="noopener">
-              <span class="roster-name">GRANAIO</span>
-              <span class="roster-cap">Griglie vive, scramble e tessere con fisica vera — demo</span>
+          <li class="roster-row" data-img="assets/img/animorio.jpg" data-accent="#4A60FF">
+            <a class="roster-link" href="https://animorio.com/" target="_blank" rel="noopener">
+              <span class="roster-name">ANIMORIO</span>
+              <span class="roster-cap">La mia libreria di animazioni e componenti per il web, gratis</span>
             </a>
           </li>
-          <li class="roster-row" data-img="assets/img/filari.jpg" data-accent="#FF3EBA">
-            <a class="roster-link" href="https://lucsal2603.github.io/filari/" target="_blank" rel="noopener">
-              <span class="roster-name">FILARI</span>
-              <span class="roster-cap">Il cubo che spara via le lettere dell'hero — demo</span>
+          <li class="roster-row" data-img="assets/img/masocoler.jpg" data-accent="#FF3EBA">
+            <a class="roster-link" href="https://lucsal2603.github.io/masocoler/" target="_blank" rel="noopener">
+              <span class="roster-name">MASO COLER</span>
+              <span class="roster-cap">Agriturismo in legno e pietra in Val di Rabbi — sito cliente</span>
             </a>
           </li>
-          <li class="roster-row" data-img="assets/img/solco.jpg" data-accent="#CEFF00">
-            <a class="roster-link" href="https://lucsal2603.github.io/solco/" target="_blank" rel="noopener">
-              <span class="roster-name">SOLCO</span>
-              <span class="roster-cap">Card 3D, lettere che cadono e tunnel di profondità — demo</span>
+          <li class="roster-row" data-img="assets/img/toniolli2.jpg" data-accent="#CEFF00">
+            <a class="roster-link" href="https://lucsal2603.github.io/toniolli-2/" target="_blank" rel="noopener">
+              <span class="roster-name">TONIOLLI</span>
+              <span class="roster-cap">Vino in salita: cantina rétro a scacchi in Val di Cembra — demo</span>
             </a>
           </li>
-          <li class="roster-row" data-img="assets/img/semente.jpg" data-accent="#31A362">
-            <a class="roster-link" href="https://lucsal2603.github.io/semente/" target="_blank" rel="noopener">
-              <span class="roster-name">SEMENTE</span>
-              <span class="roster-cap">Zoom dentro il testo knockout, orologio vivo — demo</span>
+          <li class="roster-row" data-img="assets/img/rebel.jpg" data-accent="#31A362">
+            <a class="roster-link" href="https://lucsal2603.github.io/rebel/" target="_blank" rel="noopener">
+              <span class="roster-name">REBEL</span>
+              <span class="roster-cap">Studio di brand transformation, reel nella capsula — demo</span>
             </a>
           </li>
           <li class="roster-row" data-img="assets/img/fermoposta.jpg" data-accent="#4A60FF">

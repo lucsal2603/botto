@@ -59,7 +59,7 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
   if (!isFinePointer) return;
   const g = document.getElementById('guanto');
   if (!g) return;
-  const SIZE = 52;
+  const SIZE = 60;
   const TIP_X = 0.33 * SIZE;
   const TIP_Y = 0.24 * SIZE;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -106,13 +106,81 @@ function starPoints(cx, cy, rOut, rIn, spikes = 8, rotDeg = -90) {
     gsap.to(g, { scaleX: 1, scaleY: 1, duration: 0.25, ease: 'power2.out', overwrite: 'auto' });
   });
 
+  /* click: il dito affonda come un pulsante, poi torna su elastico e lascia una botta colorata */
+  const mano = g.querySelector('.g-mano');
+  const indice = g.querySelector('.g-indice');
+  const polsino = g.querySelector('.g-polsino');
+  const COLORI = ['#4A60FF', '#FF3EBA', '#31A362', '#CEFF00'];
+  let giro = 0;
+
+  function botta(x, y) {
+    const box = document.createElement('div');
+    box.className = 'botta';
+    box.style.left = x + 'px';
+    box.style.top = y + 'px';
+    const svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('viewBox', '-50 -50 100 100');
+    const raggi = [];
+    const n = 8;
+    const off = Math.random() * Math.PI;
+    for (let i = 0; i < n; i++) {
+      const l = document.createElementNS(SVGNS, 'line');
+      l.setAttribute('stroke', COLORI[(i + giro) % COLORI.length]);
+      l.setAttribute('stroke-width', i % 2 ? 4 : 6);
+      l.setAttribute('stroke-linecap', 'round');
+      svg.appendChild(l);
+      raggi.push({ l, a: off + (i / n) * Math.PI * 2, k: i % 2 ? 0.7 : 1 });
+    }
+    const stella = document.createElementNS(SVGNS, 'polygon');
+    stella.setAttribute('points', starPoints(0, 0, 13, 5.5));
+    stella.setAttribute('fill', COLORI[giro % COLORI.length]);
+    stella.setAttribute('stroke', '#111');
+    stella.setAttribute('stroke-width', 2.5);
+    stella.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(stella);
+    box.appendChild(svg);
+    document.body.appendChild(box);
+    giro++;
+
+    const t = { p: 0 };
+    const disegna = () => {
+      const testa = 10 + 34 * Math.pow(t.p, 0.6);
+      const coda = 4 + 42 * Math.pow(t.p, 1.8);
+      raggi.forEach(({ l, a, k }) => {
+        const c = Math.cos(a), s = Math.sin(a);
+        l.setAttribute('x1', c * Math.min(coda, testa) * k);
+        l.setAttribute('y1', s * Math.min(coda, testa) * k);
+        l.setAttribute('x2', c * testa * k);
+        l.setAttribute('y2', s * testa * k);
+      });
+    };
+    disegna();
+    gsap.timeline({ onComplete: () => box.remove() })
+      .to(t, { p: 1, duration: 0.5, ease: 'power3.out', onUpdate: disegna }, 0)
+      .fromTo(stella, { scale: 0, rotation: -90, svgOrigin: '0 0' }, { scale: 1, rotation: 0, duration: 0.32, ease: 'back.out(3)' }, 0)
+      .to(stella, { scale: 0, rotation: 60, duration: 0.25, ease: 'power2.in' }, 0.34)
+      .to(svg, { opacity: 0, duration: 0.2 }, 0.38);
+  }
+
+  let premuto = false;
   window.addEventListener('pointerdown', (e) => {
     if (reduce || (e.pointerType && e.pointerType !== 'mouse')) return;
-    gsap.to(g, { scaleX: hoverScale * 1.08, scaleY: hoverScale * 0.8, duration: 0.1, overwrite: 'auto' });
+    premuto = true;
+    gsap.killTweensOf([mano, indice, polsino]);
+    gsap.timeline()
+      .to(mano, { y: -4, rotation: -4, transformOrigin: '50% 90%', duration: 0.09, ease: 'power3.out' }, 0)
+      .to(indice, { scaleY: 0.8, transformOrigin: '50% 100%', duration: 0.09, ease: 'power3.out' }, 0)
+      .to(polsino, { y: 2, duration: 0.12, ease: 'power2.out' }, 0);
+    botta(e.clientX, e.clientY);
   });
   window.addEventListener('pointerup', (e) => {
-    if (reduce || (e.pointerType && e.pointerType !== 'mouse')) return;
-    gsap.to(g, { scaleX: hoverScale, scaleY: hoverScale, duration: 0.3, ease: 'back.out(2.5)', overwrite: 'auto' });
+    if (!premuto) return;
+    premuto = false;
+    gsap.timeline()
+      .to(mano, { y: 0, rotation: 0, transformOrigin: '50% 90%', duration: 0.6, ease: 'elastic.out(1.1, 0.4)' }, 0)
+      .to(indice, { scaleY: 1, transformOrigin: '50% 100%', duration: 0.55, ease: 'elastic.out(1.3, 0.35)' }, 0)
+      .fromTo(indice, { rotation: 0 }, { keyframes: { rotation: [10, -8, 5, -2, 0] }, transformOrigin: '50% 100%', duration: 0.5, ease: 'none' }, 0.04)
+      .to(polsino, { y: 0, duration: 0.5, ease: 'elastic.out(1, 0.45)' }, 0.03);
   });
 })();
 
