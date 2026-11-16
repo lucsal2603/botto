@@ -213,15 +213,11 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
       duration: 0.55,
       stagger: 0.085,
     })
-    .to(layers, {
-      rotation: 12,
-      transformOrigin: '50% 50%',
-      duration: 0.5,
-      ease: 'power2.inOut',
-      stagger: { each: 0.03, from: 'end' },
-    }, '-=0.2')
+    /* la stella intera parte ferma e accelera fino a girare velocissima, poi esplode */
+    .to('#preloaderStar', { rotation: 540, duration: 0.9, ease: 'power2.in' }, '-=0.2')
     .add('boom')
-    .to('#preloaderStar', { scale: 16, rotation: 30, duration: 0.9, ease: 'power3.in' }, 'boom')
+    .to('#preloaderStar', { scale: 16, duration: 0.9, ease: 'power3.in' }, 'boom')
+    .to('#preloaderStar', { rotation: '+=1080', duration: 0.9, ease: 'none' }, 'boom')
     .to('#preloader', { autoAlpha: 0, duration: 0.35, ease: 'power1.out' }, 'boom+=0.75')
     .set('#preloader', { display: 'none' });
 
@@ -413,7 +409,13 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
     /* GSAP azzera le proprieta' CSS rotate/scale quando gestisce il transform:
        la rotazione da adesivo (--rot) e l'hover li fa GSAP stesso */
     const rotStat = (el) => parseFloat(getComputedStyle(el).getPropertyValue('--rot')) || 0;
-    gsap.set(stats, { transformOrigin: '50% 60%', rotation: (i, el) => rotStat(el) });
+    /* nascosti da subito: cosi' non si vedono prima del loro ingresso (niente flash allo scroll) */
+    const rotIngresso = (i, el) => rotStat(el) + (i % 2 ? 28 : -28);
+    gsap.set(stats, { transformOrigin: '50% 60%', scale: 0, autoAlpha: 0, rotation: rotIngresso });
+    stats.forEach((s) => {
+      const num = s.querySelector('.stat__num');
+      if (num.dataset.count != null) num.textContent = '0' + (num.dataset.suffix || '');
+    });
     if (isFinePointer) {
       stats.forEach((s) => {
         s.addEventListener('pointerenter', () => gsap.to(s, { rotation: 0, scale: 1.04, duration: 0.3, ease: 'back.out(2)', overwrite: 'auto' }));
@@ -425,9 +427,9 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
       start: 'top 88%',
       once: true,
       onEnter: () => {
-        gsap.from(stats, {
-          scale: 0, autoAlpha: 0,
-          rotation: (i, el) => rotStat(el) + (i % 2 ? 28 : -28),
+        gsap.to(stats, {
+          scale: 1, autoAlpha: 1,
+          rotation: (i, el) => rotStat(el),
           duration: 0.6, ease: 'back.out(1.8)', stagger: 0.09,
         });
         stats.forEach((s, i) => {
