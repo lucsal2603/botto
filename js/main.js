@@ -213,11 +213,11 @@ mm.add('(prefers-reduced-motion: no-preference)', () => {
       duration: 0.55,
       stagger: 0.085,
     })
-    /* la stella intera parte ferma e accelera fino a girare velocissima, poi esplode */
-    .to('#preloaderStar', { rotation: 540, duration: 0.9, ease: 'power2.in' }, '-=0.2')
+    /* la stella intera parte ferma e prende a girare con calma, poi esplode */
+    .to('#preloaderStar', { rotation: 120, duration: 1, ease: 'power1.in' }, '-=0.2')
     .add('boom')
     .to('#preloaderStar', { scale: 16, duration: 0.9, ease: 'power3.in' }, 'boom')
-    .to('#preloaderStar', { rotation: '+=1080', duration: 0.9, ease: 'none' }, 'boom')
+    .to('#preloaderStar', { rotation: '+=210', duration: 0.9, ease: 'none' }, 'boom')
     .to('#preloader', { autoAlpha: 0, duration: 0.35, ease: 'power1.out' }, 'boom+=0.75')
     .set('#preloader', { display: 'none' });
 
